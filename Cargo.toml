@@ -1,0 +1,23 @@
+# SPDX-FileCopyrightText: Copyright 2024 Arm Limited and/or its affiliates <open-source-office@arm.com>
+# SPDX-License-Identifier: MIT OR Apache-2.0
+
+[package]
+name = "arm-fvp-base-pac"
+version = "0.1.0"
+authors = [
+    "Balint Dobszay <balint.dobszay@arm.com>",
+    "Imre Kis <imre.kis@arm.com>",
+]
+description = "Peripheral Access Crate for Arm Fixed Virtual Platform"
+edition = "2021"
+license = "MIT OR Apache-2.0"
+repository = "https://git.trustedfirmware.org/rust-spmc/rust-spmc.git"
+keywords = ["arm", "fvp", "pac", "virtual", "platform"]
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+arm-gic   = { git = "https://git.trustedfirmware.org/rust-spmc/arm-gic.git" }
+arm-pl011   = { git = "https://git.trustedfirmware.org/rust-spmc/arm-pl011.git" }
+arm-sp805   = { git = "https://git.trustedfirmware.org/rust-spmc/arm-sp805.git" }
+spin = { version = "0.9", default-features = false, features = ["spin_mutex"] }
