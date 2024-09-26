@@ -7,7 +7,10 @@
 
 #![no_std]
 
-use core::{marker::PhantomData, ops::Deref};
+use core::{
+    marker::PhantomData,
+    ops::{Deref, DerefMut},
+};
 
 use spin::mutex::Mutex;
 
@@ -21,7 +24,7 @@ pub struct UART0 {
 }
 
 impl UART0 {
-    pub const PTR: *const PL011Registers = 0x1c09_0000 as *const _;
+    pub const PTR: *mut PL011Registers = 0x1c09_0000 as *mut _;
 }
 
 impl Deref for UART0 {
@@ -33,6 +36,13 @@ impl Deref for UART0 {
     }
 }
 
+impl DerefMut for UART0 {
+    #[inline(always)]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        unsafe { &mut *Self::PTR }
+    }
+}
+
 unsafe impl Send for UART0 {}
 
 /// UART1 - PL011
@@ -41,7 +51,7 @@ pub struct UART1 {
 }
 
 impl UART1 {
-    pub const PTR: *const PL011Registers = 0x1c0a_0000 as *const _;
+    pub const PTR: *mut PL011Registers = 0x1c0a_0000 as *mut _;
 }
 
 impl Deref for UART1 {
@@ -53,6 +63,13 @@ impl Deref for UART1 {
     }
 }
 
+impl DerefMut for UART1 {
+    #[inline(always)]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        unsafe { &mut *Self::PTR }
+    }
+}
+
 unsafe impl Send for UART1 {}
 
 /// UART2 - PL011
@@ -61,7 +78,7 @@ pub struct UART2 {
 }
 
 impl UART2 {
-    pub const PTR: *const PL011Registers = 0x1c0b_0000 as *const _;
+    pub const PTR: *mut PL011Registers = 0x1c0b_0000 as *mut _;
 }
 
 impl Deref for UART2 {
@@ -73,6 +90,13 @@ impl Deref for UART2 {
     }
 }
 
+impl DerefMut for UART2 {
+    #[inline(always)]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        unsafe { &mut *Self::PTR }
+    }
+}
+
 unsafe impl Send for UART2 {}
 
 /// UART3 - PL011
@@ -81,7 +105,7 @@ pub struct UART3 {
 }
 
 impl UART3 {
-    pub const PTR: *const PL011Registers = 0x1c0c_0000 as *const _;
+    pub const PTR: *mut PL011Registers = 0x1c0c_0000 as *mut _;
 }
 
 impl Deref for UART3 {
@@ -90,6 +114,13 @@ impl Deref for UART3 {
     #[inline(always)]
     fn deref(&self) -> &Self::Target {
         unsafe { &*Self::PTR }
+    }
+}
+
+impl DerefMut for UART3 {
+    #[inline(always)]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        unsafe { &mut *Self::PTR }
     }
 }
 
@@ -102,7 +133,7 @@ pub struct WATCHDOG {
 }
 
 impl WATCHDOG {
-    pub const PTR: *const SP805Registers = 0x1c0f_0000 as *const _;
+    pub const PTR: *mut SP805Registers = 0x1c0f_0000 as *mut _;
 }
 
 impl Deref for WATCHDOG {
@@ -111,6 +142,13 @@ impl Deref for WATCHDOG {
     #[inline(always)]
     fn deref(&self) -> &Self::Target {
         unsafe { &*Self::PTR }
+    }
+}
+
+impl DerefMut for WATCHDOG {
+    #[inline(always)]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        unsafe { &mut *Self::PTR }
     }
 }
 
@@ -123,7 +161,7 @@ pub struct GICD {
 }
 
 impl GICD {
-    pub const PTR: *const GICDRegisters = 0x2f00_0000 as *const _;
+    pub const PTR: *mut GICDRegisters = 0x2f00_0000 as *mut _;
 }
 
 impl Deref for GICD {
@@ -132,6 +170,13 @@ impl Deref for GICD {
     #[inline(always)]
     fn deref(&self) -> &Self::Target {
         unsafe { &*Self::PTR }
+    }
+}
+
+impl DerefMut for GICD {
+    #[inline(always)]
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        unsafe { &mut *Self::PTR }
     }
 }
 
