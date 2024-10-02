@@ -32,6 +32,7 @@ impl Deref for UART0 {
 
     #[inline(always)]
     fn deref(&self) -> &Self::Target {
+        // SAFETY: Self::PTR points to a valid peripheral register block on the Arm FVP platform.
         unsafe { &*Self::PTR }
     }
 }
@@ -39,10 +40,12 @@ impl Deref for UART0 {
 impl DerefMut for UART0 {
     #[inline(always)]
     fn deref_mut(&mut self) -> &mut Self::Target {
+        // SAFETY: Self::PTR points to a valid peripheral register block on the Arm FVP platform.
         unsafe { &mut *Self::PTR }
     }
 }
 
+// SAFETY: The peripheral is accessible from any core/thread.
 unsafe impl Send for UART0 {}
 
 /// UART1 - PL011
@@ -59,6 +62,7 @@ impl Deref for UART1 {
 
     #[inline(always)]
     fn deref(&self) -> &Self::Target {
+        // SAFETY: Self::PTR points to a valid peripheral register block on the Arm FVP platform.
         unsafe { &*Self::PTR }
     }
 }
@@ -66,10 +70,12 @@ impl Deref for UART1 {
 impl DerefMut for UART1 {
     #[inline(always)]
     fn deref_mut(&mut self) -> &mut Self::Target {
+        // SAFETY: Self::PTR points to a valid peripheral register block on the Arm FVP platform.
         unsafe { &mut *Self::PTR }
     }
 }
 
+// SAFETY: The peripheral is accessible from any core/thread.
 unsafe impl Send for UART1 {}
 
 /// UART2 - PL011
@@ -86,6 +92,7 @@ impl Deref for UART2 {
 
     #[inline(always)]
     fn deref(&self) -> &Self::Target {
+        // SAFETY: Self::PTR points to a valid peripheral register block on the Arm FVP platform.
         unsafe { &*Self::PTR }
     }
 }
@@ -93,10 +100,12 @@ impl Deref for UART2 {
 impl DerefMut for UART2 {
     #[inline(always)]
     fn deref_mut(&mut self) -> &mut Self::Target {
+        // SAFETY: Self::PTR points to a valid peripheral register block on the Arm FVP platform.
         unsafe { &mut *Self::PTR }
     }
 }
 
+// SAFETY: The peripheral is accessible from any core/thread.
 unsafe impl Send for UART2 {}
 
 /// UART3 - PL011
@@ -113,6 +122,7 @@ impl Deref for UART3 {
 
     #[inline(always)]
     fn deref(&self) -> &Self::Target {
+        // SAFETY: Self::PTR points to a valid peripheral register block on the Arm FVP platform.
         unsafe { &*Self::PTR }
     }
 }
@@ -120,10 +130,12 @@ impl Deref for UART3 {
 impl DerefMut for UART3 {
     #[inline(always)]
     fn deref_mut(&mut self) -> &mut Self::Target {
+        // SAFETY: Self::PTR points to a valid peripheral register block on the Arm FVP platform.
         unsafe { &mut *Self::PTR }
     }
 }
 
+// SAFETY: The peripheral is accessible from any core/thread.
 unsafe impl Send for UART3 {}
 
 /// Watchdog - SP805
@@ -141,6 +153,7 @@ impl Deref for WATCHDOG {
 
     #[inline(always)]
     fn deref(&self) -> &Self::Target {
+        // SAFETY: Self::PTR points to a valid peripheral register block on the Arm FVP platform.
         unsafe { &*Self::PTR }
     }
 }
@@ -148,10 +161,12 @@ impl Deref for WATCHDOG {
 impl DerefMut for WATCHDOG {
     #[inline(always)]
     fn deref_mut(&mut self) -> &mut Self::Target {
+        // SAFETY: Self::PTR points to a valid peripheral register block on the Arm FVP platform.
         unsafe { &mut *Self::PTR }
     }
 }
 
+// SAFETY: The peripheral is accessible from any core/thread.
 unsafe impl Send for WATCHDOG {}
 
 /// GIC Distributor
@@ -169,6 +184,7 @@ impl Deref for GICD {
 
     #[inline(always)]
     fn deref(&self) -> &Self::Target {
+        // SAFETY: Self::PTR points to a valid peripheral register block on the Arm FVP platform.
         unsafe { &*Self::PTR }
     }
 }
@@ -176,10 +192,12 @@ impl Deref for GICD {
 impl DerefMut for GICD {
     #[inline(always)]
     fn deref_mut(&mut self) -> &mut Self::Target {
+        // SAFETY: Self::PTR points to a valid peripheral register block on the Arm FVP platform.
         unsafe { &mut *Self::PTR }
     }
 }
 
+// SAFETY: The peripheral is accessible from any core/thread.
 unsafe impl Send for GICD {}
 
 static PERIPHERALS_TAKEN: Mutex<bool> = Mutex::new(false);
@@ -199,6 +217,7 @@ impl Peripherals {
     /// Take the peripherals once
     pub fn take() -> Option<Self> {
         if !*PERIPHERALS_TAKEN.lock() {
+            // SAFETY: PERIPHERALS_TAKEN ensures that this is only called once.
             Some(unsafe { Self::steal() })
         } else {
             None
