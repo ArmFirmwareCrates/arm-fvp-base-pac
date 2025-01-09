@@ -7,7 +7,7 @@ name = "arm-fvp-base-pac"
 version = "0.1.0"
 dependencies = [
  "arm-gic",
- "arm-pl011",
+ "arm-pl011-uart",
  "arm-sp805",
  "spin",
 ]
@@ -21,9 +21,9 @@ dependencies = [
 ]
 
 [[package]]
-name = "arm-pl011"
+name = "arm-pl011-uart"
 version = "0.1.0"
-source = "git+https://git.trustedfirmware.org/rust-spmc/arm-pl011.git#98117e065ecba746742964467aca324db1a8a002"
+source = "git+https://git.trustedfirmware.org/rust-spmc/arm-pl011-uart.git#cec9138935c44ac574c7d34797d0e0f4fc8f4909"
 dependencies = [
  "bitflags",
  "embedded-hal-nb",

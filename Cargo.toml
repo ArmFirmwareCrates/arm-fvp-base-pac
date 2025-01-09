@@ -18,6 +18,6 @@ keywords = ["arm", "fvp", "pac", "virtual", "platform"]
 
 [dependencies]
 arm-gic   = { git = "https://git.trustedfirmware.org/rust-spmc/arm-gic.git" }
-arm-pl011   = { git = "https://git.trustedfirmware.org/rust-spmc/arm-pl011.git" }
+arm-pl011-uart   = { git = "https://git.trustedfirmware.org/rust-spmc/arm-pl011-uart.git" }
 arm-sp805   = { git = "https://git.trustedfirmware.org/rust-spmc/arm-sp805.git" }
 spin = { version = "0.9", default-features = false, features = ["spin_mutex"] }

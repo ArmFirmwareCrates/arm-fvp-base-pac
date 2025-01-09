@@ -15,7 +15,7 @@ use core::{
 use spin::mutex::Mutex;
 
 use arm_gic::GICDRegisters;
-use arm_pl011::PL011Registers;
+use arm_pl011_uart::PL011Registers;
 use arm_sp805::SP805Registers;
 
 /// UART0 - PL011
