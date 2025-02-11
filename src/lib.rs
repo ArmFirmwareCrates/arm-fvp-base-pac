@@ -8,209 +8,59 @@
 #![no_std]
 
 use core::{
+    fmt::{self, Debug, Formatter},
     marker::PhantomData,
-    ops::{Deref, DerefMut},
 };
-
-use spin::mutex::Mutex;
 
 use arm_gic::GICDRegisters;
 use arm_pl011_uart::PL011Registers;
 use arm_sp805::SP805Registers;
-
-/// UART0 - PL011
-pub struct UART0 {
-    _marker: PhantomData<*const ()>,
-}
-
-impl UART0 {
-    pub const PTR: *mut PL011Registers = 0x1c09_0000 as *mut _;
-}
-
-impl Deref for UART0 {
-    type Target = PL011Registers;
-
-    #[inline(always)]
-    fn deref(&self) -> &Self::Target {
-        // SAFETY: Self::PTR points to a valid peripheral register block on the Arm FVP platform.
-        unsafe { &*Self::PTR }
-    }
-}
-
-impl DerefMut for UART0 {
-    #[inline(always)]
-    fn deref_mut(&mut self) -> &mut Self::Target {
-        // SAFETY: Self::PTR points to a valid peripheral register block on the Arm FVP platform.
-        unsafe { &mut *Self::PTR }
-    }
-}
-
-// SAFETY: The peripheral is accessible from any core/thread.
-unsafe impl Send for UART0 {}
-
-/// UART1 - PL011
-pub struct UART1 {
-    _marker: PhantomData<*const ()>,
-}
-
-impl UART1 {
-    pub const PTR: *mut PL011Registers = 0x1c0a_0000 as *mut _;
-}
-
-impl Deref for UART1 {
-    type Target = PL011Registers;
-
-    #[inline(always)]
-    fn deref(&self) -> &Self::Target {
-        // SAFETY: Self::PTR points to a valid peripheral register block on the Arm FVP platform.
-        unsafe { &*Self::PTR }
-    }
-}
-
-impl DerefMut for UART1 {
-    #[inline(always)]
-    fn deref_mut(&mut self) -> &mut Self::Target {
-        // SAFETY: Self::PTR points to a valid peripheral register block on the Arm FVP platform.
-        unsafe { &mut *Self::PTR }
-    }
-}
-
-// SAFETY: The peripheral is accessible from any core/thread.
-unsafe impl Send for UART1 {}
-
-/// UART2 - PL011
-pub struct UART2 {
-    _marker: PhantomData<*const ()>,
-}
-
-impl UART2 {
-    pub const PTR: *mut PL011Registers = 0x1c0b_0000 as *mut _;
-}
-
-impl Deref for UART2 {
-    type Target = PL011Registers;
-
-    #[inline(always)]
-    fn deref(&self) -> &Self::Target {
-        // SAFETY: Self::PTR points to a valid peripheral register block on the Arm FVP platform.
-        unsafe { &*Self::PTR }
-    }
-}
-
-impl DerefMut for UART2 {
-    #[inline(always)]
-    fn deref_mut(&mut self) -> &mut Self::Target {
-        // SAFETY: Self::PTR points to a valid peripheral register block on the Arm FVP platform.
-        unsafe { &mut *Self::PTR }
-    }
-}
-
-// SAFETY: The peripheral is accessible from any core/thread.
-unsafe impl Send for UART2 {}
-
-/// UART3 - PL011
-pub struct UART3 {
-    _marker: PhantomData<*const ()>,
-}
-
-impl UART3 {
-    pub const PTR: *mut PL011Registers = 0x1c0c_0000 as *mut _;
-}
-
-impl Deref for UART3 {
-    type Target = PL011Registers;
-
-    #[inline(always)]
-    fn deref(&self) -> &Self::Target {
-        // SAFETY: Self::PTR points to a valid peripheral register block on the Arm FVP platform.
-        unsafe { &*Self::PTR }
-    }
-}
-
-impl DerefMut for UART3 {
-    #[inline(always)]
-    fn deref_mut(&mut self) -> &mut Self::Target {
-        // SAFETY: Self::PTR points to a valid peripheral register block on the Arm FVP platform.
-        unsafe { &mut *Self::PTR }
-    }
-}
-
-// SAFETY: The peripheral is accessible from any core/thread.
-unsafe impl Send for UART3 {}
-
-/// Watchdog - SP805
-#[allow(clippy::upper_case_acronyms)]
-pub struct WATCHDOG {
-    _marker: PhantomData<*const ()>,
-}
-
-impl WATCHDOG {
-    pub const PTR: *mut SP805Registers = 0x1c0f_0000 as *mut _;
-}
-
-impl Deref for WATCHDOG {
-    type Target = SP805Registers;
-
-    #[inline(always)]
-    fn deref(&self) -> &Self::Target {
-        // SAFETY: Self::PTR points to a valid peripheral register block on the Arm FVP platform.
-        unsafe { &*Self::PTR }
-    }
-}
-
-impl DerefMut for WATCHDOG {
-    #[inline(always)]
-    fn deref_mut(&mut self) -> &mut Self::Target {
-        // SAFETY: Self::PTR points to a valid peripheral register block on the Arm FVP platform.
-        unsafe { &mut *Self::PTR }
-    }
-}
-
-// SAFETY: The peripheral is accessible from any core/thread.
-unsafe impl Send for WATCHDOG {}
-
-/// GIC Distributor
-#[allow(clippy::upper_case_acronyms)]
-pub struct GICD {
-    _marker: PhantomData<*const ()>,
-}
-
-impl GICD {
-    pub const PTR: *mut GICDRegisters = 0x2f00_0000 as *mut _;
-}
-
-impl Deref for GICD {
-    type Target = GICDRegisters;
-
-    #[inline(always)]
-    fn deref(&self) -> &Self::Target {
-        // SAFETY: Self::PTR points to a valid peripheral register block on the Arm FVP platform.
-        unsafe { &*Self::PTR }
-    }
-}
-
-impl DerefMut for GICD {
-    #[inline(always)]
-    fn deref_mut(&mut self) -> &mut Self::Target {
-        // SAFETY: Self::PTR points to a valid peripheral register block on the Arm FVP platform.
-        unsafe { &mut *Self::PTR }
-    }
-}
-
-// SAFETY: The peripheral is accessible from any core/thread.
-unsafe impl Send for GICD {}
+use spin::mutex::Mutex;
 
 static PERIPHERALS_TAKEN: Mutex<bool> = Mutex::new(false);
 
+/// The physical instance of some device's MMIO space.
+pub struct PhysicalInstance<T> {
+    pa: usize,
+    _phantom: PhantomData<T>,
+}
+
+impl<T> Debug for PhysicalInstance<T> {
+    fn fmt(&self, f: &mut Formatter) -> fmt::Result {
+        f.debug_struct("PhysicalInstance")
+            .field("pa", &self.pa)
+            .field("size", &size_of::<T>())
+            .finish()
+    }
+}
+
+impl<T> PhysicalInstance<T> {
+    /// # Safety
+    ///
+    /// This must refer to the physical address of a real set of device registers of type `T`, and
+    /// there must only ever be a single `PhysicalInstance` for those device registers.
+    pub unsafe fn new(pa: usize) -> Self {
+        Self {
+            pa,
+            _phantom: PhantomData,
+        }
+    }
+
+    /// Returns the physical base address of the device's registers.
+    pub fn pa(&self) -> usize {
+        self.pa
+    }
+}
+
 /// FVP peripherals
-#[allow(non_snake_case)]
+#[derive(Debug)]
 pub struct Peripherals {
-    pub UART0: UART0,
-    pub UART1: UART1,
-    pub UART2: UART2,
-    pub UART3: UART3,
-    pub WATCHDOG: WATCHDOG,
-    pub GICD: GICD,
+    pub uart0: PhysicalInstance<PL011Registers>,
+    pub uart1: PhysicalInstance<PL011Registers>,
+    pub uart2: PhysicalInstance<PL011Registers>,
+    pub uart3: PhysicalInstance<PL011Registers>,
+    pub watchdog: PhysicalInstance<SP805Registers>,
+    pub gicd: PhysicalInstance<GICDRegisters>,
 }
 
 impl Peripherals {
@@ -227,29 +77,18 @@ impl Peripherals {
     /// Unsafe version of take()
     ///
     /// # Safety
-    /// The caller has to ensure that each peripheral is only used once.
+    ///
+    /// The caller must ensure that each peripheral is only used once.
     pub unsafe fn steal() -> Self {
         *PERIPHERALS_TAKEN.lock() = true;
 
         Peripherals {
-            UART0: UART0 {
-                _marker: PhantomData,
-            },
-            UART1: UART1 {
-                _marker: PhantomData,
-            },
-            UART2: UART2 {
-                _marker: PhantomData,
-            },
-            UART3: UART3 {
-                _marker: PhantomData,
-            },
-            WATCHDOG: WATCHDOG {
-                _marker: PhantomData,
-            },
-            GICD: GICD {
-                _marker: PhantomData,
-            },
+            uart0: PhysicalInstance::new(0x1c09_0000),
+            uart1: PhysicalInstance::new(0x1c0a_0000),
+            uart2: PhysicalInstance::new(0x1c0b_0000),
+            uart3: PhysicalInstance::new(0x1c0c_0000),
+            watchdog: PhysicalInstance::new(0x1c0f_0000),
+            gicd: PhysicalInstance::new(0x2f00_0000),
         }
     }
 }
