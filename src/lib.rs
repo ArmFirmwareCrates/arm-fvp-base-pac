@@ -7,50 +7,13 @@
 
 #![no_std]
 
-use core::{
-    fmt::{self, Debug, Formatter},
-    marker::PhantomData,
-};
-
 use arm_gic::GICDRegisters;
 use arm_pl011_uart::PL011Registers;
 use arm_sp805::SP805Registers;
+use safe_mmio::PhysicalInstance;
 use spin::mutex::Mutex;
 
 static PERIPHERALS_TAKEN: Mutex<bool> = Mutex::new(false);
-
-/// The physical instance of some device's MMIO space.
-pub struct PhysicalInstance<T> {
-    pa: usize,
-    _phantom: PhantomData<T>,
-}
-
-impl<T> Debug for PhysicalInstance<T> {
-    fn fmt(&self, f: &mut Formatter) -> fmt::Result {
-        f.debug_struct("PhysicalInstance")
-            .field("pa", &self.pa)
-            .field("size", &size_of::<T>())
-            .finish()
-    }
-}
-
-impl<T> PhysicalInstance<T> {
-    /// # Safety
-    ///
-    /// This must refer to the physical address of a real set of device registers of type `T`, and
-    /// there must only ever be a single `PhysicalInstance` for those device registers.
-    pub unsafe fn new(pa: usize) -> Self {
-        Self {
-            pa,
-            _phantom: PhantomData,
-        }
-    }
-
-    /// Returns the physical base address of the device's registers.
-    pub fn pa(&self) -> usize {
-        self.pa
-    }
-}
 
 /// FVP peripherals
 #[derive(Debug)]

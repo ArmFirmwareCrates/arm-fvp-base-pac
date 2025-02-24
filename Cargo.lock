@@ -9,6 +9,7 @@ dependencies = [
  "arm-gic",
  "arm-pl011-uart",
  "arm-sp805",
+ "safe-mmio",
  "spin",
 ]
 
@@ -92,6 +93,12 @@ checksum = "0e4dccaaaf89514f546c693ddc140f729f958c247918a13380cccc6078391acc"
 dependencies = [
  "proc-macro2",
 ]
+
+[[package]]
+name = "safe-mmio"
+version = "0.1.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "30075950f15d2083592cdb9b5b175d48d332dacdc481c17546910e0c1e9cc4b1"
 
 [[package]]
 name = "spin"

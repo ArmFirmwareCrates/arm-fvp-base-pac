@@ -20,4 +20,5 @@ keywords = ["arm", "fvp", "pac", "virtual", "platform"]
 arm-gic = { git = "https://git.trustedfirmware.org/rust-spmc/arm-gic.git" }
 arm-pl011-uart = "0.1"
 arm-sp805 = { git = "https://git.trustedfirmware.org/rust-spmc/arm-sp805.git" }
+safe-mmio = "0.1.0"
 spin = { version = "0.9", default-features = false, features = ["spin_mutex"] }
