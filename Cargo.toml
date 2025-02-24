@@ -14,10 +14,9 @@ license = "MIT OR Apache-2.0"
 repository = "https://git.trustedfirmware.org/rust-spmc/rust-spmc.git"
 keywords = ["arm", "fvp", "pac", "virtual", "platform"]
 
-# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
-
 [dependencies]
 arm-gic = { git = "https://git.trustedfirmware.org/rust-spmc/arm-gic.git" }
 arm-pl011-uart = "0.1"
 arm-sp805 = { git = "https://git.trustedfirmware.org/rust-spmc/arm-sp805.git" }
+safe-mmio = "0.1.0"
 spin = { version = "0.9", default-features = false, features = ["spin_mutex"] }
