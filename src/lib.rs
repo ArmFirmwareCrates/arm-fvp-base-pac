@@ -1,4 +1,4 @@
-// SPDX-FileCopyrightText: Copyright 2023-2024 Arm Limited and/or its affiliates <open-source-office@arm.com>
+// SPDX-FileCopyrightText: Copyright 2023-2025 Arm Limited and/or its affiliates <open-source-office@arm.com>
 // SPDX-License-Identifier: MIT OR Apache-2.0
 
 //! # Peripheral Access Crate fro Arm Fixed Virtual Platform
@@ -7,12 +7,16 @@
 
 #![no_std]
 
-use core::fmt::Debug;
+// Re-export peripheral drivers and common safe-mmio types
+pub use arm_gic;
+pub use arm_pl011_uart;
+pub use arm_sp805;
+pub use safe_mmio::{PhysicalInstance, UniqueMmioPointer};
 
 use arm_gic::GICDRegisters;
 use arm_pl011_uart::PL011Registers;
 use arm_sp805::SP805Registers;
-pub use safe_mmio::PhysicalInstance;
+use core::fmt::Debug;
 use spin::mutex::Mutex;
 
 static PERIPHERALS_TAKEN: Mutex<bool> = Mutex::new(false);
