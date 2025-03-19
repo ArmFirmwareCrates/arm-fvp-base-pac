@@ -12,11 +12,13 @@ pub use arm_gic;
 pub use arm_pl011_uart;
 pub use arm_sp805;
 pub use safe_mmio::{PhysicalInstance, UniqueMmioPointer};
+pub mod power_controller;
 
 use arm_gic::GICDRegisters;
 use arm_pl011_uart::PL011Registers;
 use arm_sp805::SP805Registers;
 use core::fmt::Debug;
+use power_controller::FvpPowerControllerRegisters;
 use spin::mutex::Mutex;
 
 static PERIPHERALS_TAKEN: Mutex<bool> = Mutex::new(false);
@@ -30,6 +32,7 @@ pub struct Peripherals {
     pub uart3: PhysicalInstance<PL011Registers>,
     pub watchdog: PhysicalInstance<SP805Registers>,
     pub gicd: PhysicalInstance<GICDRegisters>,
+    pub power_controller: PhysicalInstance<FvpPowerControllerRegisters>,
 }
 
 impl Peripherals {
@@ -57,6 +60,7 @@ impl Peripherals {
             uart2: PhysicalInstance::new(0x1c0b_0000),
             uart3: PhysicalInstance::new(0x1c0c_0000),
             watchdog: PhysicalInstance::new(0x1c0f_0000),
+            power_controller: PhysicalInstance::new(0x1c10_0000),
             gicd: PhysicalInstance::new(0x2f00_0000),
         }
     }
