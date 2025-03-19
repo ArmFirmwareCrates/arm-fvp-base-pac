@@ -20,3 +20,5 @@ arm-pl011-uart = "0.3"
 arm-sp805 = { git = "https://git.trustedfirmware.org/rust-spmc/arm-sp805.git" }
 safe-mmio = "0.2"
 spin = { version = "0.9", default-features = false, features = ["spin_mutex"] }
+bitflags = "2.8"
+zerocopy = { version = "0.8", features = ["derive"] }
