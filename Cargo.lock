@@ -9,8 +9,10 @@ dependencies = [
  "arm-gic",
  "arm-pl011-uart",
  "arm-sp805",
+ "bitflags",
  "safe-mmio",
  "spin",
+ "zerocopy",
 ]
 
 [[package]]
