@@ -24,6 +24,30 @@
       "serverId": "8f6f209b-db1a-4cbf-aa44-c8bc30e9bfda"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8a5fc6e5_4c65eb69",
+        "filename": "Cargo.toml",
+        "patchSetId": 2
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1001350
+      },
+      "writtenOn": "2025-03-20T16:45:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "28fa040e_6adff464",
+      "range": {
+        "startLine": 23,
+        "startChar": 12,
+        "endLine": 23,
+        "endChar": 15
+      },
+      "revId": "85512bfeddb877b56ea3c056239433c92909d8ba",
+      "serverId": "8f6f209b-db1a-4cbf-aa44-c8bc30e9bfda"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2ef349d4_ae87f44a",
@@ -37,6 +61,24 @@
       "writtenOn": "2025-03-20T13:13:41Z",
       "side": 1,
       "message": "pwr_ctrl -\u003e power_controller\nPlease put this in ascending order by its address (i.e. before gicd). It is easier to match with the FVP spec\u0027s memory map table to see what\u0027s implemented.",
+      "revId": "85512bfeddb877b56ea3c056239433c92909d8ba",
+      "serverId": "8f6f209b-db1a-4cbf-aa44-c8bc30e9bfda"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0339e877_fb5bd381",
+        "filename": "src/lib.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1001350
+      },
+      "writtenOn": "2025-03-20T16:45:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2ef349d4_ae87f44a",
       "revId": "85512bfeddb877b56ea3c056239433c92909d8ba",
       "serverId": "8f6f209b-db1a-4cbf-aa44-c8bc30e9bfda"
     },
@@ -64,6 +106,30 @@
       "serverId": "8f6f209b-db1a-4cbf-aa44-c8bc30e9bfda"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5b412841_05105fb2",
+        "filename": "src/power_controller.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1001350
+      },
+      "writtenOn": "2025-03-20T16:45:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3726d681_57f3d73a",
+      "range": {
+        "startLine": 12,
+        "startChar": 0,
+        "endLine": 26,
+        "endChar": 0
+      },
+      "revId": "85512bfeddb877b56ea3c056239433c92909d8ba",
+      "serverId": "8f6f209b-db1a-4cbf-aa44-c8bc30e9bfda"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a8aca562_7154ffa1",
@@ -77,6 +143,30 @@
       "writtenOn": "2025-03-20T13:13:41Z",
       "side": 1,
       "message": "Having overlapping multi-bit flags is not recommended in bitflags: https://docs.rs/bitflags/2.9.0/bitflags/#multi-bit-flags\nThis should be handled separately:\n* Define a PowerOnReason enum\n* Add power_on_reason(\u0026mut self, mpidr : u32) -\u003e PowerOnReason for querying this field of the SysStatusRegister.",
+      "range": {
+        "startLine": 71,
+        "startChar": 0,
+        "endLine": 78,
+        "endChar": 53
+      },
+      "revId": "85512bfeddb877b56ea3c056239433c92909d8ba",
+      "serverId": "8f6f209b-db1a-4cbf-aa44-c8bc30e9bfda"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e4e9b15f_bfee3db6",
+        "filename": "src/power_controller.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1001350
+      },
+      "writtenOn": "2025-03-20T16:45:37Z",
+      "side": 1,
+      "message": "The only thing is that this way we have to make 2 different writes and reads for the reading the same register.\nI could get avoid this by making the system_status function return both `PowerOnReason` and `SysStatusRegister`?\n\nWhat do you think?",
+      "parentUuid": "a8aca562_7154ffa1",
       "range": {
         "startLine": 71,
         "startChar": 0,
@@ -127,6 +217,48 @@
       "serverId": "8f6f209b-db1a-4cbf-aa44-c8bc30e9bfda"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "eedff2ae_5db72e90",
+        "filename": "src/power_controller.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1001350
+      },
+      "writtenOn": "2025-03-20T16:45:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9be6d544_3e4f5d62",
+      "range": {
+        "startLine": 111,
+        "startChar": 37,
+        "endLine": 111,
+        "endChar": 39
+      },
+      "revId": "85512bfeddb877b56ea3c056239433c92909d8ba",
+      "serverId": "8f6f209b-db1a-4cbf-aa44-c8bc30e9bfda"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "80daeca1_db5a5a09",
+        "filename": "src/power_controller.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1001350
+      },
+      "writtenOn": "2025-03-20T16:45:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "84098020_67117a13",
+      "revId": "85512bfeddb877b56ea3c056239433c92909d8ba",
+      "serverId": "8f6f209b-db1a-4cbf-aa44-c8bc30e9bfda"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "355eadda_b22a1ea4",
@@ -140,6 +272,24 @@
       "writtenOn": "2025-03-20T13:13:41Z",
       "side": 1,
       "message": "Define a MPIDR_MASK in this impl block and mask the upper 8 bits here and below.",
+      "revId": "85512bfeddb877b56ea3c056239433c92909d8ba",
+      "serverId": "8f6f209b-db1a-4cbf-aa44-c8bc30e9bfda"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "27e64371_3a52a5df",
+        "filename": "src/power_controller.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1001350
+      },
+      "writtenOn": "2025-03-20T16:45:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "355eadda_b22a1ea4",
       "revId": "85512bfeddb877b56ea3c056239433c92909d8ba",
       "serverId": "8f6f209b-db1a-4cbf-aa44-c8bc30e9bfda"
     },
@@ -178,6 +328,42 @@
       "serverId": "8f6f209b-db1a-4cbf-aa44-c8bc30e9bfda"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3a9352b2_5f758184",
+        "filename": "src/power_controller.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 1001350
+      },
+      "writtenOn": "2025-03-20T16:45:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fecee5b8_18c3fae5",
+      "revId": "85512bfeddb877b56ea3c056239433c92909d8ba",
+      "serverId": "8f6f209b-db1a-4cbf-aa44-c8bc30e9bfda"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ef3b3f63_4c97dcd8",
+        "filename": "src/power_controller.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 1001350
+      },
+      "writtenOn": "2025-03-20T16:45:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "21e37dd5_9ae69bab",
+      "revId": "85512bfeddb877b56ea3c056239433c92909d8ba",
+      "serverId": "8f6f209b-db1a-4cbf-aa44-c8bc30e9bfda"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d5bac07e_a847d4a1",
@@ -195,6 +381,24 @@
       "serverId": "8f6f209b-db1a-4cbf-aa44-c8bc30e9bfda"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "27cff099_5ecb745b",
+        "filename": "src/power_controller.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 1001350
+      },
+      "writtenOn": "2025-03-20T16:45:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d5bac07e_a847d4a1",
+      "revId": "85512bfeddb877b56ea3c056239433c92909d8ba",
+      "serverId": "8f6f209b-db1a-4cbf-aa44-c8bc30e9bfda"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4eadc365_36917e0f",
@@ -208,6 +412,24 @@
       "writtenOn": "2025-03-20T13:13:41Z",
       "side": 1,
       "message": "Please split this into an `enable_wakeup_interrupts` and `disable_wakeup_interrupts` functions.",
+      "revId": "85512bfeddb877b56ea3c056239433c92909d8ba",
+      "serverId": "8f6f209b-db1a-4cbf-aa44-c8bc30e9bfda"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e7e2dd48_ed998cb6",
+        "filename": "src/power_controller.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 146,
+      "author": {
+        "id": 1001350
+      },
+      "writtenOn": "2025-03-20T16:45:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4eadc365_36917e0f",
       "revId": "85512bfeddb877b56ea3c056239433c92909d8ba",
       "serverId": "8f6f209b-db1a-4cbf-aa44-c8bc30e9bfda"
     }
