@@ -1,0 +1,215 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "28fa040e_6adff464",
+        "filename": "Cargo.toml",
+        "patchSetId": 2
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1000159
+      },
+      "writtenOn": "2025-03-20T13:13:41Z",
+      "side": 1,
+      "message": "2.9 is the latest version.",
+      "range": {
+        "startLine": 23,
+        "startChar": 12,
+        "endLine": 23,
+        "endChar": 15
+      },
+      "revId": "85512bfeddb877b56ea3c056239433c92909d8ba",
+      "serverId": "8f6f209b-db1a-4cbf-aa44-c8bc30e9bfda"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2ef349d4_ae87f44a",
+        "filename": "src/lib.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1000159
+      },
+      "writtenOn": "2025-03-20T13:13:41Z",
+      "side": 1,
+      "message": "pwr_ctrl -\u003e power_controller\nPlease put this in ascending order by its address (i.e. before gicd). It is easier to match with the FVP spec\u0027s memory map table to see what\u0027s implemented.",
+      "revId": "85512bfeddb877b56ea3c056239433c92909d8ba",
+      "serverId": "8f6f209b-db1a-4cbf-aa44-c8bc30e9bfda"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3726d681_57f3d73a",
+        "filename": "src/power_controller.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1000159
+      },
+      "writtenOn": "2025-03-20T13:13:41Z",
+      "side": 1,
+      "message": "Please remove these unused types.",
+      "range": {
+        "startLine": 12,
+        "startChar": 0,
+        "endLine": 26,
+        "endChar": 0
+      },
+      "revId": "85512bfeddb877b56ea3c056239433c92909d8ba",
+      "serverId": "8f6f209b-db1a-4cbf-aa44-c8bc30e9bfda"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a8aca562_7154ffa1",
+        "filename": "src/power_controller.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1000159
+      },
+      "writtenOn": "2025-03-20T13:13:41Z",
+      "side": 1,
+      "message": "Having overlapping multi-bit flags is not recommended in bitflags: https://docs.rs/bitflags/2.9.0/bitflags/#multi-bit-flags\nThis should be handled separately:\n* Define a PowerOnReason enum\n* Add power_on_reason(\u0026mut self, mpidr : u32) -\u003e PowerOnReason for querying this field of the SysStatusRegister.",
+      "range": {
+        "startLine": 71,
+        "startChar": 0,
+        "endLine": 78,
+        "endChar": 53
+      },
+      "revId": "85512bfeddb877b56ea3c056239433c92909d8ba",
+      "serverId": "8f6f209b-db1a-4cbf-aa44-c8bc30e9bfda"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9be6d544_3e4f5d62",
+        "filename": "src/power_controller.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1000159
+      },
+      "writtenOn": "2025-03-20T13:13:41Z",
+      "side": 1,
+      "message": "These parameters should be called `mpidr` to indicate its value.",
+      "range": {
+        "startLine": 111,
+        "startChar": 37,
+        "endLine": 111,
+        "endChar": 39
+      },
+      "revId": "85512bfeddb877b56ea3c056239433c92909d8ba",
+      "serverId": "8f6f209b-db1a-4cbf-aa44-c8bc30e9bfda"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "84098020_67117a13",
+        "filename": "src/power_controller.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1000159
+      },
+      "writtenOn": "2025-03-20T13:13:41Z",
+      "side": 1,
+      "message": "Please rename this to `system_status`, using \u0027get_\u0027 prefix in getters is not recommended in the Rust style guide.",
+      "revId": "85512bfeddb877b56ea3c056239433c92909d8ba",
+      "serverId": "8f6f209b-db1a-4cbf-aa44-c8bc30e9bfda"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "355eadda_b22a1ea4",
+        "filename": "src/power_controller.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1000159
+      },
+      "writtenOn": "2025-03-20T13:13:41Z",
+      "side": 1,
+      "message": "Define a MPIDR_MASK in this impl block and mask the upper 8 bits here and below.",
+      "revId": "85512bfeddb877b56ea3c056239433c92909d8ba",
+      "serverId": "8f6f209b-db1a-4cbf-aa44-c8bc30e9bfda"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fecee5b8_18c3fae5",
+        "filename": "src/power_controller.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 1000159
+      },
+      "writtenOn": "2025-03-20T13:13:41Z",
+      "side": 1,
+      "message": "`power_on_processor`",
+      "revId": "85512bfeddb877b56ea3c056239433c92909d8ba",
+      "serverId": "8f6f209b-db1a-4cbf-aa44-c8bc30e9bfda"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "21e37dd5_9ae69bab",
+        "filename": "src/power_controller.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 1000159
+      },
+      "writtenOn": "2025-03-20T13:13:41Z",
+      "side": 1,
+      "message": "These functions do not violate any Rust safety guarantees, no need for unsafe.",
+      "revId": "85512bfeddb877b56ea3c056239433c92909d8ba",
+      "serverId": "8f6f209b-db1a-4cbf-aa44-c8bc30e9bfda"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d5bac07e_a847d4a1",
+        "filename": "src/power_controller.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 1000159
+      },
+      "writtenOn": "2025-03-20T13:13:41Z",
+      "side": 1,
+      "message": "`power_off_processor`",
+      "revId": "85512bfeddb877b56ea3c056239433c92909d8ba",
+      "serverId": "8f6f209b-db1a-4cbf-aa44-c8bc30e9bfda"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4eadc365_36917e0f",
+        "filename": "src/power_controller.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 146,
+      "author": {
+        "id": 1000159
+      },
+      "writtenOn": "2025-03-20T13:13:41Z",
+      "side": 1,
+      "message": "Please split this into an `enable_wakeup_interrupts` and `disable_wakeup_interrupts` functions.",
+      "revId": "85512bfeddb877b56ea3c056239433c92909d8ba",
+      "serverId": "8f6f209b-db1a-4cbf-aa44-c8bc30e9bfda"
+    }
+  ]
+}
