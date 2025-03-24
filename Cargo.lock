@@ -27,9 +27,9 @@ dependencies = [
 
 [[package]]
 name = "arm-pl011-uart"
-version = "0.3.0"
+version = "0.3.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "bed01fb1be86080a2e9d93ae75e485837712a497f6e729e8ea329151a982e032"
+checksum = "ff5b0f1e39ec186e409c6fd80bbb83aa00622ca71c9c0561b5571df3b5f5391f"
 dependencies = [
  "bitflags",
  "embedded-hal-nb",
@@ -41,8 +41,9 @@ dependencies = [
 
 [[package]]
 name = "arm-sp805"
-version = "0.1.0"
-source = "git+https://git.trustedfirmware.org/rust-spmc/arm-sp805.git#826b861f78f36fd3e51a199b1d6969b5e5d48a5b"
+version = "0.1.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "b51f04b17c58f653b74ade8f0f7bfdb01ae32cc1ffdface0802d01760b20f56d"
 dependencies = [
  "bitflags",
  "safe-mmio",

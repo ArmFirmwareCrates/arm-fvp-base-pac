@@ -1,13 +1,14 @@
 // SPDX-FileCopyrightText: Copyright 2025 Arm Limited and/or its affiliates <open-source-office@arm.com>
 // SPDX-License-Identifier: MIT OR Apache-2.0
 
+//! FVP Power Controller driver.
+
 use bitflags::bitflags;
 use safe_mmio::UniqueMmioPointer;
 use safe_mmio::{field, fields::ReadPureWrite};
 use zerocopy::{FromBytes, Immutable, IntoBytes, KnownLayout};
 
-// Register descriptions
-
+/// Power on reason.
 #[derive(Clone, Copy, PartialEq, Eq, Debug)]
 pub enum PowerOnReason {
     /// Cold power-on.
@@ -51,7 +52,7 @@ bitflags! {
     }
 
     /// Power Control SYS Status Register
-    pub struct SysStatusRegister: u32 {
+    pub struct SystemStatus: u32 {
         /// A value of 1 indicates that affinity level 2 is active/on. If affinity level 2 is not
         /// implemented this bit is RAZ.
         const L2 = 1 << 31;
@@ -112,9 +113,9 @@ impl<'a> FvpPowerController<'a> {
     /// This is done by writing the ID for the required core to the PSYS register and then reading
     /// the value along with the associated status.
     /// Please see `power_on_reason` for other related information.
-    pub fn system_status(&mut self, mpidr: u32) -> SysStatusRegister {
+    pub fn system_status(&mut self, mpidr: u32) -> SystemStatus {
         // There are no usage constraints
-        SysStatusRegister::from_bits_truncate(self.system_status_reg(mpidr))
+        SystemStatus::from_bits_truncate(self.system_status_reg(mpidr))
     }
 
     /// Brings up the given processor from low-power mode by writing to the PPONR register
@@ -185,11 +186,6 @@ mod tests {
             Self { regs: [0u32; 5] }
         }
 
-        #[allow(unused)]
-        pub fn reg_write(&mut self, offset: usize, value: u32) {
-            self.regs[offset / 4] = value;
-        }
-
         pub fn reg_read(&self, offset: usize) -> u32 {
             self.regs[offset / 4]
         }
@@ -216,12 +212,12 @@ mod tests {
 
         let sys_status = fvp_power_controller.system_status(fake_mpidr);
 
-        assert!(!sys_status.contains(SysStatusRegister::L2));
-        assert!(!sys_status.contains(SysStatusRegister::L1));
-        assert!(!sys_status.contains(SysStatusRegister::L0));
-        assert!(!sys_status.contains(SysStatusRegister::WEN));
-        assert!(!sys_status.contains(SysStatusRegister::PC));
-        assert!(!sys_status.contains(SysStatusRegister::PP));
+        assert!(!sys_status.contains(SystemStatus::L2));
+        assert!(!sys_status.contains(SystemStatus::L1));
+        assert!(!sys_status.contains(SystemStatus::L0));
+        assert!(!sys_status.contains(SystemStatus::WEN));
+        assert!(!sys_status.contains(SystemStatus::PC));
+        assert!(!sys_status.contains(SystemStatus::PP));
     }
 
     #[test]
