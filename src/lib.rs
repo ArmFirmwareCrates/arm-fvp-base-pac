@@ -1,12 +1,15 @@
 // SPDX-FileCopyrightText: Copyright 2023-2025 Arm Limited and/or its affiliates <open-source-office@arm.com>
 // SPDX-License-Identifier: MIT OR Apache-2.0
 
-//! # Peripheral Access Crate fro Arm Fixed Virtual Platform
-//!
-//! The crate provides access to the peripherals of [Arm Fixed Virtual Platform](https://developer.arm.com/Tools%20and%20Software/Fixed%20Virtual%20Platforms).
-
 #![no_std]
+#![doc = include_str!("../README.md")]
+#![deny(clippy::undocumented_unsafe_blocks)]
 
+//! Arm Fixed Virtual Platform Peripheral Access Crate
+//!
+//! The crate provides memory map description and access to the peripherals.
+
+pub mod power_controller;
 pub mod system;
 
 // Re-export peripheral drivers and common safe-mmio types
@@ -14,7 +17,6 @@ pub use arm_gic;
 pub use arm_pl011_uart;
 pub use arm_sp805;
 pub use safe_mmio::{PhysicalInstance, UniqueMmioPointer};
-pub mod power_controller;
 
 use arm_gic::GICDRegisters;
 use arm_pl011_uart::PL011Registers;
@@ -112,8 +114,8 @@ pub struct Peripherals {
     pub uart2: PhysicalInstance<PL011Registers>,
     pub uart3: PhysicalInstance<PL011Registers>,
     pub watchdog: PhysicalInstance<SP805Registers>,
-    pub gicd: PhysicalInstance<GICDRegisters>,
     pub power_controller: PhysicalInstance<FvpPowerControllerRegisters>,
+    pub gicd: PhysicalInstance<GICDRegisters>,
 }
 
 impl Peripherals {
