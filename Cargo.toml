@@ -1,4 +1,4 @@
-# SPDX-FileCopyrightText: Copyright 2024 Arm Limited and/or its affiliates <open-source-office@arm.com>
+# SPDX-FileCopyrightText: Copyright 2024-2025 Arm Limited and/or its affiliates <open-source-office@arm.com>
 # SPDX-License-Identifier: MIT OR Apache-2.0
 
 [package]
@@ -8,17 +8,17 @@ authors = [
     "Balint Dobszay <balint.dobszay@arm.com>",
     "Imre Kis <imre.kis@arm.com>",
 ]
-description = "Peripheral Access Crate for Arm Fixed Virtual Platform"
+description = "Arm Base Fixed Virtual Platform Peripheral Access Crate"
 edition = "2021"
 license = "MIT OR Apache-2.0"
-repository = "https://git.trustedfirmware.org/rust-spmc/rust-spmc.git"
+repository = "https://git.trustedfirmware.org/rust-spmc/arm-fvp-base-pac.git"
 keywords = ["arm", "fvp", "pac", "virtual", "platform"]
 
 [dependencies]
 arm-gic = { git = "https://git.trustedfirmware.org/rust-spmc/arm-gic.git" }
 arm-pl011-uart = "0.3"
 arm-sp805 = { git = "https://git.trustedfirmware.org/rust-spmc/arm-sp805.git" }
+bitflags = "2.9"
 safe-mmio = "0.2"
 spin = { version = "0.9", default-features = false, features = ["spin_mutex"] }
-bitflags = "2.9"
 zerocopy = { version = "0.8", features = ["derive"] }
