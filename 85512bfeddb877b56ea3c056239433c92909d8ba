@@ -179,6 +179,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e3f5cd48_cdcba934",
+        "filename": "src/power_controller.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1000159
+      },
+      "writtenOn": "2025-03-24T11:28:07Z",
+      "side": 1,
+      "message": "It is fine two have two separate functions for these, because these pieces of information are somewhat unrelated. The power on reason is relevant for the early boot code when it checks if this is a cold boot. The system status is used by the PSCI platform implementation.\nIn other words these two functions are not likely to be called one after the other so this doesn\u0027t introduce an overhead.\nYou can also define a private function for reading `psysr` as a u32 and then call it in the individual functions.",
+      "parentUuid": "e4e9b15f_bfee3db6",
+      "range": {
+        "startLine": 71,
+        "startChar": 0,
+        "endLine": 78,
+        "endChar": 53
+      },
+      "revId": "85512bfeddb877b56ea3c056239433c92909d8ba",
+      "serverId": "8f6f209b-db1a-4cbf-aa44-c8bc30e9bfda"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9be6d544_3e4f5d62",
         "filename": "src/power_controller.rs",
         "patchSetId": 2
