@@ -18,6 +18,24 @@
       "serverId": "8f6f209b-db1a-4cbf-aa44-c8bc30e9bfda"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8d3aec79_8764c8f5",
+        "filename": "src/power_controller.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1001350
+      },
+      "writtenOn": "2025-03-24T15:37:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f7a1347a_8044a4bd",
+      "revId": "fae3b1a53d8ce037b5516a532d4fc6b2245fd86d",
+      "serverId": "8f6f209b-db1a-4cbf-aa44-c8bc30e9bfda"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bf900e2d_80d202ad",
@@ -31,6 +49,30 @@
       "writtenOn": "2025-03-24T15:03:01Z",
       "side": 1,
       "message": "This is not unused anymore.",
+      "range": {
+        "startLine": 29,
+        "startChar": 4,
+        "endLine": 29,
+        "endChar": 20
+      },
+      "revId": "fae3b1a53d8ce037b5516a532d4fc6b2245fd86d",
+      "serverId": "8f6f209b-db1a-4cbf-aa44-c8bc30e9bfda"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "103da00f_e71d2180",
+        "filename": "src/power_controller.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1001350
+      },
+      "writtenOn": "2025-03-24T15:37:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bf900e2d_80d202ad",
       "range": {
         "startLine": 29,
         "startChar": 4,
@@ -58,6 +100,24 @@
       "serverId": "8f6f209b-db1a-4cbf-aa44-c8bc30e9bfda"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9b4161b0_38e4e729",
+        "filename": "src/power_controller.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1001350
+      },
+      "writtenOn": "2025-03-24T15:37:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a8146fba_4665d9c1",
+      "revId": "fae3b1a53d8ce037b5516a532d4fc6b2245fd86d",
+      "serverId": "8f6f209b-db1a-4cbf-aa44-c8bc30e9bfda"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0e19c9b5_d2a97825",
@@ -71,6 +131,30 @@
       "writtenOn": "2025-03-24T15:03:01Z",
       "side": 1,
       "message": "`pub` is not necessary, the users of this crate should only read `psysr` via `power_on_reason` or `system_status`.",
+      "range": {
+        "startLine": 107,
+        "startChar": 4,
+        "endLine": 107,
+        "endChar": 7
+      },
+      "revId": "fae3b1a53d8ce037b5516a532d4fc6b2245fd86d",
+      "serverId": "8f6f209b-db1a-4cbf-aa44-c8bc30e9bfda"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0a381186_081c8ec0",
+        "filename": "src/power_controller.rs",
+        "patchSetId": 6
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1001350
+      },
+      "writtenOn": "2025-03-24T15:37:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0e19c9b5_d2a97825",
       "range": {
         "startLine": 107,
         "startChar": 4,
