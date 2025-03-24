@@ -17,11 +17,29 @@ pub mod power_controller;
 use arm_gic::GICDRegisters;
 use arm_pl011_uart::PL011Registers;
 use arm_sp805::SP805Registers;
-use core::fmt::Debug;
+use core::{fmt::Debug, ops::RangeInclusive};
 use power_controller::FvpPowerControllerRegisters;
 use spin::mutex::Mutex;
 
 static PERIPHERALS_TAKEN: Mutex<bool> = Mutex::new(false);
+
+/// Memory map based on 'Table 3-3 Base Platform memory map'.
+pub struct MemoryMap;
+
+impl MemoryMap {
+    pub const TRUSTED_BOOT_ROM: RangeInclusive<usize> = 0x00_0000_0000..=0x00_03FF_FFFF;
+    pub const TRUSTED_SRAM: RangeInclusive<usize> = 0x00_0400_0000..=0x00_0403_FFFF;
+    pub const TRUSTED_DRAM: RangeInclusive<usize> = 0x00_0600_0000..=0x00_07FF_FFFF;
+    pub const NOR_FLASH0: RangeInclusive<usize> = 0x00_0800_0000..=0x00_0BFF_FFFF;
+    pub const NOR_FLASH1: RangeInclusive<usize> = 0x00_0C00_0000..=0x00_0FFF_FFFF;
+    pub const PSRAM: RangeInclusive<usize> = 0x00_1400_0000..=0x00_17FF_FFFF;
+    pub const VRAM: RangeInclusive<usize> = 0x00_1800_0000..=0x00_19FF_FFFF;
+    pub const NON_TRUSTED_ROM: RangeInclusive<usize> = 0x00_1F00_0000..=0x00_1F00_0FFF;
+    pub const NON_TRUSTED_SRAM: RangeInclusive<usize> = 0x00_2E00_0000..=0x00_2E00_FFFF;
+    pub const DRAM0: RangeInclusive<usize> = 0x00_8000_0000..=0x00_FFFF_FFFF;
+    pub const DRAM1: RangeInclusive<usize> = 0x08_8000_0000..=0x0F_FFFF_FFFF;
+    pub const DRAM2: RangeInclusive<usize> = 0x88_0000_0000..=0xFF_FFFF_FFFF;
+}
 
 /// FVP peripherals
 #[derive(Debug)]
