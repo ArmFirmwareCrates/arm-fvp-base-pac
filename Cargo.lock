@@ -42,7 +42,8 @@ dependencies = [
 [[package]]
 name = "arm-sp805"
 version = "0.1.0"
-source = "git+https://git.trustedfirmware.org/rust-spmc/arm-sp805.git#826b861f78f36fd3e51a199b1d6969b5e5d48a5b"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "4ba5913258bf4ceb91ff38f8237ef6e2234f6ace0db97b2ecde189c2ba8446c7"
 dependencies = [
  "bitflags",
  "safe-mmio",
