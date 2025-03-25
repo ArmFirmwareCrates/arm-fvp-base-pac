@@ -18,6 +18,24 @@
       "serverId": "8f6f209b-db1a-4cbf-aa44-c8bc30e9bfda"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4980cc2b_1df00991",
+        "filename": "src/power_controller.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1001350
+      },
+      "writtenOn": "2025-03-25T10:39:36Z",
+      "side": 1,
+      "message": "I\u0027ve done this so that we are aligned with the rest of the crates, thanks for pointing it out.\nDone.",
+      "parentUuid": "32b7d908_9984c9b1",
+      "revId": "5a496b60e8441ca6fb90ab6355c9f07b345690d7",
+      "serverId": "8f6f209b-db1a-4cbf-aa44-c8bc30e9bfda"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c3e593e1_e74fafdb",
@@ -31,6 +49,24 @@
       "writtenOn": "2025-03-25T09:57:19Z",
       "side": 1,
       "message": "Should we also derive `KnownLayout`?",
+      "revId": "5a496b60e8441ca6fb90ab6355c9f07b345690d7",
+      "serverId": "8f6f209b-db1a-4cbf-aa44-c8bc30e9bfda"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d0f59f2f_3c000484",
+        "filename": "src/power_controller.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1001350
+      },
+      "writtenOn": "2025-03-25T10:39:36Z",
+      "side": 1,
+      "message": "Something weird is going on when I try to do this:\n\nI derive `KnownLayout` and I get a compilation error.\nHowever, when I compare against `arm-pl011-uart` crate I\u0027m not doing anything different that I\u0027m aware of.\n\nThis is the error that I get:\n```\n75 | #[derive(Clone, Eq, FromBytes, Immutable, IntoBytes, KnownLayout, PartialEq)]\n   |                                                      ^^^^^^^^^^^ the trait `KnownLayout` is not implemented for `ReadPureWrite\u003cu32\u003e`\n```\n\nI don\u0027t understand how for `arm-pl011-uart` crate it seems to be implemented for this type but in here it\u0027s not?",
+      "parentUuid": "c3e593e1_e74fafdb",
       "revId": "5a496b60e8441ca6fb90ab6355c9f07b345690d7",
       "serverId": "8f6f209b-db1a-4cbf-aa44-c8bc30e9bfda"
     },
@@ -52,6 +88,24 @@
       "serverId": "8f6f209b-db1a-4cbf-aa44-c8bc30e9bfda"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bfe4fcc2_1611bb43",
+        "filename": "src/power_controller.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1001350
+      },
+      "writtenOn": "2025-03-25T10:39:36Z",
+      "side": 1,
+      "message": "Huh, weird ... clippy is not complaining about this here.\nDone.",
+      "parentUuid": "bb56cbdb_53e44453",
+      "revId": "5a496b60e8441ca6fb90ab6355c9f07b345690d7",
+      "serverId": "8f6f209b-db1a-4cbf-aa44-c8bc30e9bfda"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ae9edf68_73f67505",
@@ -65,6 +119,24 @@
       "writtenOn": "2025-03-25T09:57:19Z",
       "side": 1,
       "message": "Do we check this somehow? Same for line 127 and 134",
+      "revId": "5a496b60e8441ca6fb90ab6355c9f07b345690d7",
+      "serverId": "8f6f209b-db1a-4cbf-aa44-c8bc30e9bfda"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0ea3aa45_ee9e8621",
+        "filename": "src/power_controller.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1001350
+      },
+      "writtenOn": "2025-03-25T10:39:36Z",
+      "side": 1,
+      "message": "We need to access the `mpidr` for the current core for this and we need to check whether the core is power off or not, so we are relying on the user of the crate to perform those checks. Does this make sense?",
+      "parentUuid": "ae9edf68_73f67505",
       "revId": "5a496b60e8441ca6fb90ab6355c9f07b345690d7",
       "serverId": "8f6f209b-db1a-4cbf-aa44-c8bc30e9bfda"
     }
