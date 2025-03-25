@@ -7,6 +7,8 @@
 
 #![no_std]
 
+pub mod system;
+
 // Re-export peripheral drivers and common safe-mmio types
 pub use arm_gic;
 pub use arm_pl011_uart;
@@ -17,6 +19,7 @@ pub mod power_controller;
 use arm_gic::GICDRegisters;
 use arm_pl011_uart::PL011Registers;
 use arm_sp805::SP805Registers;
+use system::FvpSystemRegisters;
 use core::{fmt::Debug, ops::RangeInclusive};
 use power_controller::FvpPowerControllerRegisters;
 use spin::mutex::Mutex;
@@ -44,6 +47,7 @@ impl MemoryMap {
 /// FVP peripherals
 #[derive(Debug)]
 pub struct Peripherals {
+    pub system: PhysicalInstance<FvpSystemRegisters>,
     pub uart0: PhysicalInstance<PL011Registers>,
     pub uart1: PhysicalInstance<PL011Registers>,
     pub uart2: PhysicalInstance<PL011Registers>,
@@ -73,6 +77,7 @@ impl Peripherals {
         *PERIPHERALS_TAKEN.lock() = true;
 
         Peripherals {
+            system: PhysicalInstance::new(0x1c01_0000),
             uart0: PhysicalInstance::new(0x1c09_0000),
             uart1: PhysicalInstance::new(0x1c0a_0000),
             uart2: PhysicalInstance::new(0x1c0b_0000),
