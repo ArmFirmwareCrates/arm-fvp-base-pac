@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "32b7d908_9984c9b1",
+        "filename": "src/power_controller.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1000160
+      },
+      "writtenOn": "2025-03-25T09:57:19Z",
+      "side": 1,
+      "message": "nit: We can keep this as is, but IMO it\u0027s easier to read if the mask bits are not shifted. And then we just shift at a single place when checking the bits, i.e. `(value \u003e\u003e SHIFT) \u0026 MASK`",
+      "revId": "5a496b60e8441ca6fb90ab6355c9f07b345690d7",
+      "serverId": "8f6f209b-db1a-4cbf-aa44-c8bc30e9bfda"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c3e593e1_e74fafdb",
+        "filename": "src/power_controller.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1000160
+      },
+      "writtenOn": "2025-03-25T09:57:19Z",
+      "side": 1,
+      "message": "Should we also derive `KnownLayout`?",
+      "revId": "5a496b60e8441ca6fb90ab6355c9f07b345690d7",
+      "serverId": "8f6f209b-db1a-4cbf-aa44-c8bc30e9bfda"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bb56cbdb_53e44453",
+        "filename": "src/power_controller.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1000160
+      },
+      "writtenOn": "2025-03-25T09:57:19Z",
+      "side": 1,
+      "message": "These doc comments should be split to one line + newline + rest of the comment. See https://review.trustedfirmware.org/c/rust-spmc/arm-ffa/+/35955",
+      "revId": "5a496b60e8441ca6fb90ab6355c9f07b345690d7",
+      "serverId": "8f6f209b-db1a-4cbf-aa44-c8bc30e9bfda"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ae9edf68_73f67505",
+        "filename": "src/power_controller.rs",
+        "patchSetId": 7
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1000160
+      },
+      "writtenOn": "2025-03-25T09:57:19Z",
+      "side": 1,
+      "message": "Do we check this somehow? Same for line 127 and 134",
+      "revId": "5a496b60e8441ca6fb90ab6355c9f07b345690d7",
+      "serverId": "8f6f209b-db1a-4cbf-aa44-c8bc30e9bfda"
+    }
+  ]
+}
