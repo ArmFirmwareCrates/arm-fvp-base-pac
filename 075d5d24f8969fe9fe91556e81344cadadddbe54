@@ -18,6 +18,24 @@
       "serverId": "8f6f209b-db1a-4cbf-aa44-c8bc30e9bfda"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "039835a0_775e0256",
+        "filename": "src/lib.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1000159
+      },
+      "writtenOn": "2025-03-26T16:01:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c99e050b_c4ebdee6",
+      "revId": "075d5d24f8969fe9fe91556e81344cadadddbe54",
+      "serverId": "8f6f209b-db1a-4cbf-aa44-c8bc30e9bfda"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8937976a_869ec2a5",
@@ -35,6 +53,24 @@
       "serverId": "8f6f209b-db1a-4cbf-aa44-c8bc30e9bfda"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ccd40caa_51b2cf95",
+        "filename": "src/lib.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1000159
+      },
+      "writtenOn": "2025-03-26T16:01:54Z",
+      "side": 1,
+      "message": "I used an older version of the reference, changing it to 512k.",
+      "parentUuid": "8937976a_869ec2a5",
+      "revId": "075d5d24f8969fe9fe91556e81344cadadddbe54",
+      "serverId": "8f6f209b-db1a-4cbf-aa44-c8bc30e9bfda"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ff6314c1_caf21f74",
@@ -48,6 +84,24 @@
       "writtenOn": "2025-03-26T12:54:17Z",
       "side": 1,
       "message": "I think we should add the peripherals as well, instead of having the base address defined in `steal()`",
+      "revId": "075d5d24f8969fe9fe91556e81344cadadddbe54",
+      "serverId": "8f6f209b-db1a-4cbf-aa44-c8bc30e9bfda"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b950b3e7_4b9ddbb9",
+        "filename": "src/lib.rs",
+        "patchSetId": 2
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1000159
+      },
+      "writtenOn": "2025-03-26T16:01:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ff6314c1_caf21f74",
       "revId": "075d5d24f8969fe9fe91556e81344cadadddbe54",
       "serverId": "8f6f209b-db1a-4cbf-aa44-c8bc30e9bfda"
     }
