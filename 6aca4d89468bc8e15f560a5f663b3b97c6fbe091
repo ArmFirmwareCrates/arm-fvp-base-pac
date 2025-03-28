@@ -16,6 +16,24 @@
       "message": "Virtio RNG is missing",
       "revId": "6aca4d89468bc8e15f560a5f663b3b97c6fbe091",
       "serverId": "8f6f209b-db1a-4cbf-aa44-c8bc30e9bfda"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b1d50af9_216f6eb9",
+        "filename": "src/lib.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1000160
+      },
+      "writtenOn": "2025-03-28T18:52:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7ffdbed6_82641c15",
+      "revId": "6aca4d89468bc8e15f560a5f663b3b97c6fbe091",
+      "serverId": "8f6f209b-db1a-4cbf-aa44-c8bc30e9bfda"
     }
   ]
 }
