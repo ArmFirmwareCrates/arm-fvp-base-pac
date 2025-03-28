@@ -24,6 +24,30 @@
       "serverId": "8f6f209b-db1a-4cbf-aa44-c8bc30e9bfda"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f27ca86f_16d9318e",
+        "filename": "src/system.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1000159
+      },
+      "writtenOn": "2025-03-28T16:05:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b80d2015_de520d05",
+      "range": {
+        "startLine": 32,
+        "startChar": 17,
+        "endLine": 32,
+        "endChar": 18
+      },
+      "revId": "23f86c2b5704395ad080a2c9018e67a814b11979",
+      "serverId": "8f6f209b-db1a-4cbf-aa44-c8bc30e9bfda"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b5fdf7ac_1ecc0ad4",
@@ -37,6 +61,24 @@
       "writtenOn": "2025-03-28T15:11:34Z",
       "side": 1,
       "message": "In the latest doc there are only 2 procid regs",
+      "revId": "23f86c2b5704395ad080a2c9018e67a814b11979",
+      "serverId": "8f6f209b-db1a-4cbf-aa44-c8bc30e9bfda"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "073e063f_5938cee6",
+        "filename": "src/system.rs",
+        "patchSetId": 3
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1000159
+      },
+      "writtenOn": "2025-03-28T16:05:14Z",
+      "side": 1,
+      "message": "Base FVPs have four procids and VE FVPS have only two. This might be a mistake in the documentation.",
+      "parentUuid": "b5fdf7ac_1ecc0ad4",
       "revId": "23f86c2b5704395ad080a2c9018e67a814b11979",
       "serverId": "8f6f209b-db1a-4cbf-aa44-c8bc30e9bfda"
     }
