@@ -34,6 +34,24 @@
       "parentUuid": "c164db36_122bad16",
       "revId": "cddaf06cb79c2567c8f499b9078d578fd848dac1",
       "serverId": "8f6f209b-db1a-4cbf-aa44-c8bc30e9bfda"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f5693720_f64f78f6",
+        "filename": "Cargo.toml",
+        "patchSetId": 1
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1000160
+      },
+      "writtenOn": "2025-04-01T13:27:03Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "5ff422a8_d446a07a",
+      "revId": "cddaf06cb79c2567c8f499b9078d578fd848dac1",
+      "serverId": "8f6f209b-db1a-4cbf-aa44-c8bc30e9bfda"
     }
   ]
 }
