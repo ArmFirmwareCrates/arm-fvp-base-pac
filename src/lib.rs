@@ -113,6 +113,7 @@ pub struct Peripherals {
     pub uart3: PhysicalInstance<PL011Registers>,
     pub watchdog: PhysicalInstance<SP805Registers>,
     pub power_controller: PhysicalInstance<FvpPowerControllerRegisters>,
+    pub trusted_watchdog: PhysicalInstance<SP805Registers>,
     pub gicd: PhysicalInstance<GICDRegisters>,
 }
 
@@ -143,6 +144,7 @@ impl Peripherals {
             uart3: PhysicalInstance::new(*MemoryMap::UART3.start()),
             watchdog: PhysicalInstance::new(*MemoryMap::WATCHDOG.start()),
             power_controller: PhysicalInstance::new(*MemoryMap::POWER_CONTROLLER.start()),
+            trusted_watchdog: PhysicalInstance::new(*MemoryMap::TRUSTED_WATCHDOG.start()),
             gicd: PhysicalInstance::new(*MemoryMap::GICD.start()),
         }
     }
