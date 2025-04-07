@@ -16,9 +16,14 @@ keywords = ["arm", "fvp", "pac", "virtual", "platform"]
 
 [dependencies]
 arm-gic = { git = "https://git.trustedfirmware.org/rust-spmc/arm-gic.git" }
-arm-pl011-uart = "0.3"
+arm-pl011-uart = { version = "0.3", default-features = false }
 arm-sp805 = "0.1"
 bitflags = "2.9"
 safe-mmio = "0.2"
 spin = { version = "0.9", default-features = false, features = ["spin_mutex"] }
 zerocopy = { version = "0.8", features = ["derive"] }
+
+[features]
+default = ["embedded-hal-nb", "embedded-io"]
+embedded-hal-nb = ["arm-pl011-uart/embedded-hal-nb"]
+embedded-io = ["arm-pl011-uart/embedded-io"]
