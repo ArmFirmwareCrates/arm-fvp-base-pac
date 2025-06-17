@@ -14,7 +14,7 @@ pub use arm_pl011_uart;
 pub use arm_sp805;
 pub use safe_mmio::{PhysicalInstance, UniqueMmioPointer};
 
-use arm_gic::GICDRegisters;
+use arm_gic::gicv3::registers::{Gicd, GicrSgi};
 use arm_pl011_uart::PL011Registers;
 use arm_sp805::SP805Registers;
 use core::{fmt::Debug, ops::RangeInclusive};
@@ -114,7 +114,8 @@ pub struct Peripherals {
     pub watchdog: PhysicalInstance<SP805Registers>,
     pub power_controller: PhysicalInstance<FvpPowerControllerRegisters>,
     pub trusted_watchdog: PhysicalInstance<SP805Registers>,
-    pub gicd: PhysicalInstance<GICDRegisters>,
+    pub gicd: PhysicalInstance<Gicd>,
+    pub gicr: PhysicalInstance<GicrSgi>,
 }
 
 impl Peripherals {
@@ -146,6 +147,7 @@ impl Peripherals {
             power_controller: PhysicalInstance::new(*MemoryMap::POWER_CONTROLLER.start()),
             trusted_watchdog: PhysicalInstance::new(*MemoryMap::TRUSTED_WATCHDOG.start()),
             gicd: PhysicalInstance::new(*MemoryMap::GICD.start()),
+            gicr: PhysicalInstance::new(*MemoryMap::GICR.start()),
         }
     }
 }
