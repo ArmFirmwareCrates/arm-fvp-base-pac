@@ -1,4 +1,4 @@
-// SPDX-FileCopyrightText: Copyright 2023-2025 Arm Limited and/or its affiliates <open-source-office@arm.com>
+// SPDX-FileCopyrightText: Copyright The arm-fvp-base-pac Contributors.
 // SPDX-License-Identifier: MIT OR Apache-2.0
 
 #![no_std]
