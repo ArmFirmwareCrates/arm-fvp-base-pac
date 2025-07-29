@@ -1,0 +1,7 @@
+Code-Review+2: Bálint Dobszay <balint.dobszay@arm.com>
+Verified+1: ci-bot
+Submitted-by: Bálint Dobszay <balint.dobszay@arm.com>
+Submitted-at: Tue, 29 Jul 2025 13:49:15 +0000
+Reviewed-on: https://review.trustedfirmware.org/c/rust-spmc/arm-fvp-base-pac/+/40922
+Project: rust-spmc/arm-fvp-base-pac
+Branch: refs/heads/main
