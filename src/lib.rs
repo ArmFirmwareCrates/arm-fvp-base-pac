@@ -9,11 +9,13 @@ pub mod power_controller;
 pub mod system;
 
 // Re-export peripheral drivers and common safe-mmio types
+pub use arm_generic_timer;
 pub use arm_gic;
 pub use arm_pl011_uart;
 pub use arm_sp805;
 pub use safe_mmio::{PhysicalInstance, UniqueMmioPointer};
 
+use arm_generic_timer::{CntBase, CntControlBase, CntCtlBase, CntReadBase};
 use arm_gic::gicv3::registers::{Gicd, GicrSgi};
 use arm_pl011_uart::PL011Registers;
 use arm_sp805::SP805Registers;
@@ -113,7 +115,12 @@ pub struct Peripherals {
     pub uart3: PhysicalInstance<PL011Registers>,
     pub watchdog: PhysicalInstance<SP805Registers>,
     pub power_controller: PhysicalInstance<FvpPowerControllerRegisters>,
+    pub refclk_cntcontrol: PhysicalInstance<CntControlBase>,
     pub trusted_watchdog: PhysicalInstance<SP805Registers>,
+    pub refclk_cntread: PhysicalInstance<CntReadBase>,
+    pub ap_refclk_cntctl: PhysicalInstance<CntCtlBase>,
+    pub ap_refclk_cntbase0: PhysicalInstance<CntBase>,
+    pub ap_refclk_cntbase1: PhysicalInstance<CntBase>,
     pub gicd: PhysicalInstance<Gicd>,
     pub gicr: PhysicalInstance<GicrSgi>,
 }
@@ -145,7 +152,12 @@ impl Peripherals {
             uart3: PhysicalInstance::new(*MemoryMap::UART3.start()),
             watchdog: PhysicalInstance::new(*MemoryMap::WATCHDOG.start()),
             power_controller: PhysicalInstance::new(*MemoryMap::POWER_CONTROLLER.start()),
+            refclk_cntcontrol: PhysicalInstance::new(*MemoryMap::REFCLK_CNTCONTROL.start()),
             trusted_watchdog: PhysicalInstance::new(*MemoryMap::TRUSTED_WATCHDOG.start()),
+            refclk_cntread: PhysicalInstance::new(*MemoryMap::REFCLK_CNTREAD.start()),
+            ap_refclk_cntctl: PhysicalInstance::new(*MemoryMap::AP_REFCLK_CNTCTL.start()),
+            ap_refclk_cntbase0: PhysicalInstance::new(*MemoryMap::AP_REFCLK_CNTBASE0.start()),
+            ap_refclk_cntbase1: PhysicalInstance::new(*MemoryMap::AP_REFCLK_CNTBASE1.start()),
             gicd: PhysicalInstance::new(*MemoryMap::GICD.start()),
             gicr: PhysicalInstance::new(*MemoryMap::GICR.start()),
         }

@@ -6,12 +6,24 @@ version = 4
 name = "arm-fvp-base-pac"
 version = "0.1.0"
 dependencies = [
+ "arm-generic-timer",
  "arm-gic",
  "arm-pl011-uart",
  "arm-sp805",
  "bitflags",
  "safe-mmio",
  "spin",
+ "zerocopy",
+]
+
+[[package]]
+name = "arm-generic-timer"
+version = "0.1.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "50ba875451bfa7caa944ce1b99d64e81e4e137abea235f7e5d9c8eee05fd7fb2"
+dependencies = [
+ "bitflags",
+ "safe-mmio",
  "zerocopy",
 ]
 
