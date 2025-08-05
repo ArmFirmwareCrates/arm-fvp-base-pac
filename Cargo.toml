@@ -15,6 +15,7 @@ repository = "https://git.trustedfirmware.org/rust-spmc/arm-fvp-base-pac.git"
 keywords = ["arm", "fvp", "pac", "virtual", "platform"]
 
 [dependencies]
+arm-cci = "0.1"
 arm-generic-timer = "0.1"
 arm-gic = "0.5.0"
 arm-pl011-uart = { version = "0.3", default-features = false }

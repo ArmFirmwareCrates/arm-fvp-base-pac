@@ -9,12 +9,14 @@ pub mod power_controller;
 pub mod system;
 
 // Re-export peripheral drivers and common safe-mmio types
+pub use arm_cci;
 pub use arm_generic_timer;
 pub use arm_gic;
 pub use arm_pl011_uart;
 pub use arm_sp805;
 pub use safe_mmio::{PhysicalInstance, UniqueMmioPointer};
 
+use arm_cci::Cci5x0Registers;
 use arm_generic_timer::{CntBase, CntControlBase, CntCtlBase, CntReadBase};
 use arm_gic::gicv3::registers::{Gicd, GicrSgi};
 use arm_pl011_uart::PL011Registers;
@@ -68,6 +70,7 @@ impl MemoryMap {
     const UTILITY_BUS: RangeInclusive<usize> = 0x00_1E00_0000..=0x00_1EFF_FFFF;
     pub const NON_TRUSTED_ROM: RangeInclusive<usize> = 0x00_1F00_0000..=0x00_1F00_0FFF;
     const CORESIGHT: RangeInclusive<usize> = 0x00_2000_0000..=0x00_27FF_FFFF;
+    const CCI_550: RangeInclusive<usize> = 0x00_2A00_0000..=0x00_2A09_FFFF;
     const REFCLK_CNTCONTROL: RangeInclusive<usize> = 0x00_2A43_0000..=0x00_2A43_FFFF;
     const EL2_WATCHDOG_CONTROL: RangeInclusive<usize> = 0x00_2A44_0000..=0x00_2A44_FFFF;
     const EL2_WATCHDOG_REFRESH: RangeInclusive<usize> = 0x00_2A45_0000..=0x00_2A45_FFFF;
@@ -115,6 +118,8 @@ pub struct Peripherals {
     pub uart3: PhysicalInstance<PL011Registers>,
     pub watchdog: PhysicalInstance<SP805Registers>,
     pub power_controller: PhysicalInstance<FvpPowerControllerRegisters>,
+    /// CCI-550 is only available on the FVP Base RevC platform when the cluster count is 1 or 2.
+    pub cci_550: PhysicalInstance<Cci5x0Registers>,
     pub refclk_cntcontrol: PhysicalInstance<CntControlBase>,
     pub trusted_watchdog: PhysicalInstance<SP805Registers>,
     pub refclk_cntread: PhysicalInstance<CntReadBase>,
@@ -152,6 +157,7 @@ impl Peripherals {
             uart3: PhysicalInstance::new(*MemoryMap::UART3.start()),
             watchdog: PhysicalInstance::new(*MemoryMap::WATCHDOG.start()),
             power_controller: PhysicalInstance::new(*MemoryMap::POWER_CONTROLLER.start()),
+            cci_550: PhysicalInstance::new(*MemoryMap::CCI_550.start()),
             refclk_cntcontrol: PhysicalInstance::new(*MemoryMap::REFCLK_CNTCONTROL.start()),
             trusted_watchdog: PhysicalInstance::new(*MemoryMap::TRUSTED_WATCHDOG.start()),
             refclk_cntread: PhysicalInstance::new(*MemoryMap::REFCLK_CNTREAD.start()),
@@ -162,4 +168,14 @@ impl Peripherals {
             gicr: PhysicalInstance::new(*MemoryMap::GICR.start()),
         }
     }
+}
+
+/// CCI-550 index assignment of internal components.
+pub struct Cci550Map;
+
+impl Cci550Map {
+    /// Index of cluster 0.
+    pub const CLUSTER0: usize = 5;
+    /// Index of cluster 1.
+    pub const CLUSTER1: usize = 6;
 }

@@ -12,10 +12,10 @@ and [Fast Models Reference Guide Revision: 11.28](https://developer.arm.com/docu
 * `Peripherals` structure for obtaining individual peripherals while maintaining ownership.
 * FVP power controller driver
 * FVP system peripheral driver
-* Re-exporting `arm-generic-timer`, `arm-gic`, `arm-pl011-uart` and `arm-sp805` drivers and common
-  `safe-mmio` types. This enables projects to use these peripherals without adding these crates as
-  explicit dependencies to the project. This also prevents having driver version conflicts in the
-  project.
+* Re-exporting `arm-cci`, `arm-generic-timer`, `arm-gic`, `arm-pl011-uart` and `arm-sp805` drivers
+  and common `safe-mmio` types. This enables projects to use these peripherals without adding these
+  crates as explicit dependencies to the project. This also prevents having driver version conflicts
+  in the project.
 
 ## Limitations
 

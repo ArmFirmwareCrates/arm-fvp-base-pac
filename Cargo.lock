@@ -3,9 +3,21 @@
 version = 4
 
 [[package]]
+name = "arm-cci"
+version = "0.1.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "df8165d803bd589df3ffcc2c705932f60ca2585ca9adb7c676434317241ba974"
+dependencies = [
+ "bitflags",
+ "safe-mmio",
+ "zerocopy",
+]
+
+[[package]]
 name = "arm-fvp-base-pac"
 version = "0.1.0"
 dependencies = [
+ "arm-cci",
  "arm-generic-timer",
  "arm-gic",
  "arm-pl011-uart",
