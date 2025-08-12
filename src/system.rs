@@ -366,11 +366,11 @@ mod tests {
             self.regs[offset / 4]
         }
 
-        fn get(&mut self) -> UniqueMmioPointer<FvpSystemRegisters> {
+        fn get(&mut self) -> UniqueMmioPointer<'_, FvpSystemRegisters> {
             UniqueMmioPointer::from(transmute_mut!(&mut self.regs))
         }
 
-        pub fn system_for_test(&mut self) -> FvpSystemPeripheral {
+        pub fn system_for_test(&mut self) -> FvpSystemPeripheral<'_> {
             FvpSystemPeripheral::new(self.get())
         }
     }

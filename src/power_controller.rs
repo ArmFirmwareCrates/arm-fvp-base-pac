@@ -190,11 +190,11 @@ mod tests {
             self.regs[offset / 4]
         }
 
-        fn get(&mut self) -> UniqueMmioPointer<FvpPowerControllerRegisters> {
+        fn get(&mut self) -> UniqueMmioPointer<'_, FvpPowerControllerRegisters> {
             UniqueMmioPointer::from(transmute_mut!(&mut self.regs))
         }
 
-        pub fn fvp_power_controller_for_test(&mut self) -> FvpPowerController {
+        pub fn fvp_power_controller_for_test(&mut self) -> FvpPowerController<'_> {
             FvpPowerController::new(self.get())
         }
     }
