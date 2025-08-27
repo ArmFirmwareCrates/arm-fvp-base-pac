@@ -3,7 +3,7 @@
 
 [package]
 name = "arm-fvp-base-pac"
-version = "0.1.2"
+version = "0.1.3"
 authors = [
     "Balint Dobszay <balint.dobszay@arm.com>",
     "Imre Kis <imre.kis@arm.com>",
@@ -22,7 +22,7 @@ arm-pl011-uart = { version = "0.3", default-features = false }
 arm-sp805 = "0.1"
 bitflags = "2.9"
 safe-mmio = "0.2"
-spin = { version = "0.9", default-features = false, features = ["spin_mutex"] }
+spin = { version = "0.10", default-features = false, features = ["spin_mutex"] }
 zerocopy = { version = "0.8", features = ["derive"] }
 
 [features]
