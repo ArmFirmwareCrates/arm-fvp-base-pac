@@ -14,6 +14,8 @@ pub use arm_generic_timer;
 pub use arm_gic;
 pub use arm_pl011_uart;
 pub use arm_sp805;
+pub use arm_tzc;
+
 pub use safe_mmio::{PhysicalInstance, UniqueMmioPointer};
 
 use arm_cci::Cci5x0Registers;
@@ -21,6 +23,7 @@ use arm_generic_timer::{CntBase, CntControlBase, CntCtlBase, CntReadBase};
 use arm_gic::gicv3::registers::{Gicd, GicrSgi};
 use arm_pl011_uart::PL011Registers;
 use arm_sp805::SP805Registers;
+use arm_tzc::TzcRegisters;
 use core::{fmt::Debug, ops::RangeInclusive};
 use power_controller::FvpPowerControllerRegisters;
 use spin::mutex::Mutex;
@@ -123,6 +126,7 @@ pub struct Peripherals {
     pub cci_550: PhysicalInstance<Cci5x0Registers>,
     pub refclk_cntcontrol: PhysicalInstance<CntControlBase>,
     pub trusted_watchdog: PhysicalInstance<SP805Registers>,
+    pub trustzone_controller: PhysicalInstance<TzcRegisters>,
     pub refclk_cntread: PhysicalInstance<CntReadBase>,
     pub ap_refclk_cntctl: PhysicalInstance<CntCtlBase>,
     pub ap_refclk_cntbase0: PhysicalInstance<CntBase>,
@@ -161,6 +165,7 @@ impl Peripherals {
             cci_550: PhysicalInstance::new(*MemoryMap::CCI_550.start()),
             refclk_cntcontrol: PhysicalInstance::new(*MemoryMap::REFCLK_CNTCONTROL.start()),
             trusted_watchdog: PhysicalInstance::new(*MemoryMap::TRUSTED_WATCHDOG.start()),
+            trustzone_controller: PhysicalInstance::new(*MemoryMap::TRUSTZONE_CONTROLLER.start()),
             refclk_cntread: PhysicalInstance::new(*MemoryMap::REFCLK_CNTREAD.start()),
             ap_refclk_cntctl: PhysicalInstance::new(*MemoryMap::AP_REFCLK_CNTCTL.start()),
             ap_refclk_cntbase0: PhysicalInstance::new(*MemoryMap::AP_REFCLK_CNTBASE0.start()),

@@ -20,6 +20,7 @@ arm-generic-timer = "0.1"
 arm-gic = "0.6"
 arm-pl011-uart = { version = "0.3", default-features = false }
 arm-sp805 = "0.1"
+arm-tzc = "0.1"
 bitflags = "2.9"
 safe-mmio = "0.2"
 spin = { version = "0.10", default-features = false, features = ["spin_mutex"] }

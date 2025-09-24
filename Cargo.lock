@@ -22,6 +22,7 @@ dependencies = [
  "arm-gic",
  "arm-pl011-uart",
  "arm-sp805",
+ "arm-tzc",
  "bitflags",
  "safe-mmio",
  "spin",
@@ -70,6 +71,17 @@ name = "arm-sp805"
 version = "0.1.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "952e2661eff687e263d0bb6acef282092ee729eaea3586f904046f74b49bbe8d"
+dependencies = [
+ "bitflags",
+ "safe-mmio",
+ "zerocopy",
+]
+
+[[package]]
+name = "arm-tzc"
+version = "0.1.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "832ef75000f5bad7a50f10d0e3a1ee95ac37988e68f25329157b5aff8dd0842b"
 dependencies = [
  "bitflags",
  "safe-mmio",
