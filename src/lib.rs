@@ -104,8 +104,9 @@ impl MemoryMap {
     const PCIE_MEMORY_REGION2: RangeInclusive<usize> = 0x40_0000_0000..=0x7F_FFFF_FFFF;
     pub const DRAM2: RangeInclusive<usize> = 0x88_0000_0000..=0xFF_FFFF_FFFF;
     pub const DRAM3: RangeInclusive<usize> = 0x00_0880_0000_0000..=0x00_0FFF_FFFF_FFFF;
-    pub const DRAM4: RangeInclusive<usize> = 0x08_8000_0000_0000..=0x0F_FFFF_FFFF_FFFF;
-    pub const DRAM5: RangeInclusive<usize> = 0x88_0000_0000_0000..=0x8F_FFFF_FFFF_FFFF;
+    pub const DRAM4: RangeInclusive<usize> = 0x00_8800_0000_0000..=0x00_FFFF_FFFF_FFFF;
+    pub const DRAM5: RangeInclusive<usize> = 0x08_8000_0000_0000..=0x0F_FFFF_FFFF_FFFF;
+    pub const DRAM6: RangeInclusive<usize> = 0x88_0000_0000_0000..=0x8F_FFFF_FFFF_FFFF;
 }
 
 /// FVP peripherals
