@@ -180,3 +180,31 @@ impl Cci550Map {
     /// Index of cluster 1.
     pub const CLUSTER1: usize = 6;
 }
+
+/// Filter unit assignment in the TrustZone Controller.
+pub struct TzcFilter;
+
+impl TzcFilter {
+    /// Default filter index.
+    pub const DEFAULT: usize = 0;
+    /// Filter of PL111_CLCD and HDLCD0.
+    pub const LCD: usize = 2;
+}
+
+/// Non-Secure Access Identity (NSAID) assignment in the TrustZone Controller.
+pub struct TzcNsaid;
+
+impl TzcNsaid {
+    /// Default NSAID.
+    pub const DEFAULT: usize = 0;
+    // Cluster0 and Cluster 1 application processors and VirtioNetMMIO.
+    pub const APPLICATION_PROCESSORS: usize = 9;
+    /// VirtioP9Device, VirtioBlockDevice.
+    pub const VIRTIO: usize = 8;
+    /// PCI bus.
+    pub const PCI: usize = 1;
+    /// PL111_CLCD.
+    pub const CLCD: usize = 7;
+    /// HDLCD0.
+    pub const HDLCD0: usize = 2;
+}
