@@ -15,7 +15,7 @@ dependencies = [
 
 [[package]]
 name = "arm-fvp-base-pac"
-version = "0.1.3"
+version = "0.1.4"
 dependencies = [
  "arm-cci",
  "arm-generic-timer",
