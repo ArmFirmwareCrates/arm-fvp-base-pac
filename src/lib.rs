@@ -20,7 +20,10 @@ pub use safe_mmio::{PhysicalInstance, UniqueMmioPointer};
 
 use arm_cci::Cci5x0Registers;
 use arm_generic_timer::{CntBase, CntControlBase, CntCtlBase, CntReadBase};
-use arm_gic::gicv3::registers::{Gicd, GicrSgi};
+use arm_gic::{
+    gicv3::registers::{Gicd, GicrSgi},
+    IntId,
+};
 use arm_pl011_uart::PL011Registers;
 use arm_sp805::SP805Registers;
 use arm_tzc::TzcRegisters;
@@ -212,4 +215,82 @@ impl TzcNsaid {
     pub const CLCD: usize = 7;
     /// HDLCD0.
     pub const HDLCD0: usize = 2;
+}
+
+/// Private Peripheral Interrupt assignments for the Base Platform.
+pub struct PrivatePeripheralInterrupts;
+
+impl PrivatePeripheralInterrupts {
+    pub const SECURE_HYPERVISOR_VIRTUAL_TIMER: IntId = IntId::ppi(3);
+    pub const SECURE_HYPERVISOR_PHYSICAL_TIMER: IntId = IntId::ppi(4);
+    pub const SPU: IntId = IntId::ppi(5);
+    pub const DCC_COMMS_CHANNEL: IntId = IntId::ppi(6);
+    pub const PMU_OVERFLOW: IntId = IntId::ppi(7);
+    pub const CTI: IntId = IntId::ppi(8);
+    pub const VIRTUAL_CPU_INTERFACE_MAINTENANCE: IntId = IntId::ppi(9);
+    pub const HYPERVISOR_TIMER: IntId = IntId::ppi(10);
+    pub const VIRTUAL_TIMER: IntId = IntId::ppi(11);
+    pub const HYPERVISOR_VIRTUAL_TIMER: IntId = IntId::ppi(12);
+    pub const SECURE_PHYSICAL_TIMER: IntId = IntId::ppi(13);
+    pub const NONSECURE_PHYSICAL_TIMER: IntId = IntId::ppi(14);
+    pub const TRBU: IntId = IntId::ppi(15);
+}
+
+/// Shared Peripheral Interrupt assignments for the Base Platform.
+pub struct SharedPeripheralInterrupts;
+
+impl SharedPeripheralInterrupts {
+    pub const WATCHDOG: IntId = IntId::spi(0);
+    pub const DUAL_TIMER0: IntId = IntId::spi(2);
+    pub const DUAL_TIMER1: IntId = IntId::spi(3);
+    pub const RTC: IntId = IntId::spi(4);
+    pub const UART0: IntId = IntId::spi(5);
+    pub const UART1: IntId = IntId::spi(6);
+    pub const UART2: IntId = IntId::spi(7);
+    pub const UART3: IntId = IntId::spi(8);
+    pub const MCIINTR0: IntId = IntId::spi(9);
+    pub const MCIINTR1: IntId = IntId::spi(10);
+    pub const AACI: IntId = IntId::spi(11);
+    pub const KMI_KEYBOARD: IntId = IntId::spi(12);
+    pub const KMI_MOUSE: IntId = IntId::spi(13);
+    pub const CLCD: IntId = IntId::spi(14);
+    pub const CLCD_CONTROLLER: IntId = Self::CLCD;
+    pub const ETHERNET: IntId = IntId::spi(15);
+    pub const TRUSTED_WATCHDOG: IntId = IntId::spi(24);
+    pub const CNTPSIRQ: IntId = IntId::spi(25);
+    pub const CNTPSIRQ1: IntId = IntId::spi(26);
+    pub const EL2_WATCHDOG_WS0: IntId = IntId::spi(27);
+    pub const EL2_WATCHDOG_WS1: IntId = IntId::spi(28);
+    pub const VIRTIO_BLOCK_DEVICE: IntId = IntId::spi(42);
+    pub const VIRTIO_PLAN9_DEVICE: IntId = IntId::spi(43);
+    pub const VIRTIO_NET_DEVICE: IntId = IntId::spi(44);
+    pub const VIRTIO_RNG: IntId = IntId::spi(46);
+    pub const TRUSTZONE_CONTROLLER: IntId = IntId::spi(48);
+    pub const PMUIRQ_CL0_CPU0: IntId = IntId::spi(60);
+    pub const PMUIRQ_CL0_CPU1: IntId = IntId::spi(61);
+    pub const PMUIRQ_CL0_CPU2: IntId = IntId::spi(62);
+    pub const PMUIRQ_CL0_CPU3: IntId = IntId::spi(63);
+    pub const PMUIRQ_CL1_CPU0: IntId = IntId::spi(64);
+    pub const PMUIRQ_CL1_CPU1: IntId = IntId::spi(65);
+    pub const PMUIRQ_CL1_CPU2: IntId = IntId::spi(66);
+    pub const PMUIRQ_CL1_CPU3: IntId = IntId::spi(67);
+    pub const SMMUV3_NONSECURE_COMBINED: IntId = IntId::spi(71);
+    pub const SMMUV3_SECURE_COMBINED: IntId = IntId::spi(72);
+    pub const SMMUV3_SECURE_EVENT_QUEUE: IntId = IntId::spi(73);
+    pub const SMMUV3_NONSECURE_EVENT_QUEUE: IntId = IntId::spi(74);
+    pub const SMMUV3_PRI_QUEUE: IntId = IntId::spi(75);
+    pub const SMMUV3_SECURE_COMMAND_QUEUE_SYNC: IntId = IntId::spi(76);
+    pub const SMMUV3_NONSECURE_COMMAND_QUEUE_SYNC: IntId = IntId::spi(77);
+    pub const SMMUV3_SECURE_GERROR: IntId = IntId::spi(78);
+    pub const SMMUV3_NONSECURE_GERROR: IntId = IntId::spi(79);
+    pub const HDLCD_CONTROLLER: IntId = IntId::spi(85);
+    pub const TRUSTED_RNG: IntId = IntId::spi(107);
+    pub const MALI_G76_GPU: IntId = IntId::spi(160);
+    pub const MALI_G76_GPU_JOB: IntId = IntId::spi(161);
+    pub const MALI_G76_GPU_MMU: IntId = IntId::spi(162);
+    pub const PCIE_INTA: IntId = IntId::spi(168);
+    pub const PCIE_INTB: IntId = IntId::spi(169);
+    pub const PCIE_INTC: IntId = IntId::spi(170);
+    pub const PCIE_INTD: IntId = IntId::spi(171);
+    pub const PCIE_SERR: IntId = IntId::spi(175);
 }
