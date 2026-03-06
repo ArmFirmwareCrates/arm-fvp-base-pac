@@ -4,6 +4,7 @@
 #![no_std]
 #![doc = include_str!("../README.md")]
 #![deny(clippy::undocumented_unsafe_blocks)]
+#![cfg_attr(docsrs, feature(doc_cfg))]
 
 #[cfg(all(feature = "base-revc", feature = "base-r"))]
 compile_error!("must only choose one of these Cargo features: `base-revc`; `base-r`");
@@ -24,7 +25,7 @@ pub use safe_mmio::{PhysicalInstance, UniqueMmioPointer};
 
 #[cfg(feature = "base-revc")]
 use arm_cci::Cci5x0Registers;
-use arm_generic_timer::{CntBase, CntControlBase, CntCtlBase, CntReadBase};
+use arm_generic_timer::memory_mapped::{CntBase, CntControlBase, CntCtlBase, CntReadBase};
 use arm_gic::{
     gicv3::registers::{Gicd, GicrSgi},
     IntId,

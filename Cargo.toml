@@ -3,7 +3,7 @@
 
 [package]
 name = "arm-fvp-base-pac"
-version = "0.1.4"
+version = "0.2.0"
 authors = [
     "Balint Dobszay <balint.dobszay@arm.com>",
     "Imre Kis <imre.kis@arm.com>",
@@ -15,16 +15,20 @@ repository = "https://git.trustedfirmware.org/arm-firmware-crates/arm-fvp-base-p
 keywords = ["arm", "fvp", "pac", "virtual", "platform"]
 
 [dependencies]
-arm-cci = { version = "0.1", optional = true }
-arm-generic-timer = "0.1"
-arm-gic = "0.7"
-arm-pl011-uart = { version = "0.4", default-features = false }
-arm-sp805 = "0.1"
-arm-tzc = "0.1"
-bitflags = "2.9"
-safe-mmio = "0.2"
+arm-cci = { version = "0.2.0", optional = true }
+arm-generic-timer = "0.2.0"
+arm-gic = "0.8.1"
+arm-pl011-uart = { version = "0.5.0", default-features = false }
+arm-sp805 = "0.2.0"
+arm-tzc = "0.2.0"
+bitflags = "2.11.0"
+safe-mmio = "0.3.0"
 spin = { version = "0.10", default-features = false, features = ["spin_mutex"] }
 zerocopy = { version = "0.8", features = ["derive"] }
+
+[dev-dependencies]
+arm-gic = { version = "0.8.1", features = ["fakes"]}
+arm-generic-timer = { version = "0.2.0", features = ["fakes"] }
 
 [features]
 default = ["embedded-hal-nb", "embedded-io"]
@@ -32,3 +36,12 @@ embedded-hal-nb = ["arm-pl011-uart/embedded-hal-nb"]
 embedded-io = ["arm-pl011-uart/embedded-io"]
 base-revc = ["arm-cci"]
 base-r = []
+el1 = ["arm-generic-timer/el1"]
+el2 = ["el1", "arm-gic/el2", "arm-generic-timer/el2"]
+el3 = ["el2", "arm-gic/el3"]
+fakes = ["arm-gic/fakes", "arm-generic-timer/fakes"]
+
+[package.metadata.docs.rs]
+default-target = "aarch64-unknown-none"
+features = ["embedded-hal-nb", "embedded-io", "base-revc", "el1", "el2", "el3"]
+rustdoc-args = ["--cfg", "docsrs"]

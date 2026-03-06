@@ -12,15 +12,20 @@ and [Fast Models Reference Guide Revision: 11.28](https://developer.arm.com/docu
 * `Peripherals` structure for obtaining individual peripherals while maintaining ownership.
 * FVP power controller driver
 * FVP system peripheral driver
-* Re-exporting `arm-cci`, `arm-generic-timer`, `arm-gic`, `arm-pl011-uart` and `arm-sp805` drivers
-  and common `safe-mmio` types. This enables projects to use these peripherals without adding these
-  crates as explicit dependencies to the project. This also prevents having driver version conflicts
-  in the project.
+* Re-exporting `arm-cci`, `arm-generic-timer`, `arm-gic`, `arm-pl011-uart`, `arm-sp805` and
+  `arm-tzc` drivers and common `safe-mmio` types. This enables projects to use these peripherals
+  without adding these crates as explicit dependencies to the project. This also prevents having
+  driver version conflicts in the project.
 
 ## Feature flags
 
 * `base-revc`: Enables the Base Platform RevC-only MMIO regions and interrupt assignments.
 * `base-r`: Selects a BaseR Platform compatible memory map, by swapping the first two 2 GiB blocks of address space.
+* `el1`: Enables system register based GIC and Timers features which relies on EL1 system registers.
+* `el2`: Enables system register based GIC and Timers features which relies on EL2 system registers.
+* `el3`: Enables system register based GIC and Timers features which relies on EL3 system registers.
+* `fakes`: Accesses fake system registers rather than the real ones in GIC and Generic Timer drivers,
+  for running tests on the host.
 
 ## Limitations
 
