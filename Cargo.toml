@@ -22,7 +22,7 @@ arm-pl011-uart = { version = "0.4", default-features = false }
 arm-sp805 = "0.1"
 arm-tzc = "0.1"
 bitflags = "2.9"
-safe-mmio = "0.2"
+safe-mmio = "0.3"
 spin = { version = "0.10", default-features = false, features = ["spin_mutex"] }
 zerocopy = { version = "0.8", features = ["derive"] }
 
