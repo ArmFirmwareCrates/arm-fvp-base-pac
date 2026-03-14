@@ -19,7 +19,7 @@ arm-cci = "0.1"
 arm-generic-timer = "0.1"
 arm-gic = "0.7"
 arm-pl011-uart = { version = "0.4", default-features = false }
-arm-sp805 = "0.1"
+arm-sp805 = "0.2"
 arm-tzc = "0.1"
 bitflags = "2.9"
 safe-mmio = "0.2"
