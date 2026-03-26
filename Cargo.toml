@@ -15,7 +15,7 @@ repository = "https://git.trustedfirmware.org/arm-firmware-crates/arm-fvp-base-p
 keywords = ["arm", "fvp", "pac", "virtual", "platform"]
 
 [dependencies]
-arm-cci = "0.1"
+arm-cci = { version = "0.1", optional = true }
 arm-generic-timer = "0.1"
 arm-gic = "0.7"
 arm-pl011-uart = { version = "0.4", default-features = false }
@@ -30,3 +30,4 @@ zerocopy = { version = "0.8", features = ["derive"] }
 default = ["embedded-hal-nb", "embedded-io"]
 embedded-hal-nb = ["arm-pl011-uart/embedded-hal-nb"]
 embedded-io = ["arm-pl011-uart/embedded-io"]
+base-revc = ["arm-cci"]

@@ -17,6 +17,10 @@ and [Fast Models Reference Guide Revision: 11.28](https://developer.arm.com/docu
   crates as explicit dependencies to the project. This also prevents having driver version conflicts
   in the project.
 
+## Feature flags
+
+* `base-revc`: Enables the Base Platform RevC-only MMIO regions and interrupt assignments.
+
 ## Limitations
 
 * Not all peripherals are handled yet.

@@ -9,6 +9,7 @@ pub mod power_controller;
 pub mod system;
 
 // Re-export peripheral drivers and common safe-mmio types
+#[cfg(feature = "base-revc")]
 pub use arm_cci;
 pub use arm_generic_timer;
 pub use arm_gic;
@@ -18,6 +19,7 @@ pub use arm_tzc;
 
 pub use safe_mmio::{PhysicalInstance, UniqueMmioPointer};
 
+#[cfg(feature = "base-revc")]
 use arm_cci::Cci5x0Registers;
 use arm_generic_timer::{CntBase, CntControlBase, CntCtlBase, CntReadBase};
 use arm_gic::{
@@ -76,6 +78,7 @@ impl MemoryMap {
     pub const UTILITY_BUS: RangeInclusive<usize> = 0x00_1E00_0000..=0x00_1EFF_FFFF;
     pub const NON_TRUSTED_ROM: RangeInclusive<usize> = 0x00_1F00_0000..=0x00_1F00_0FFF;
     pub const CORESIGHT: RangeInclusive<usize> = 0x00_2000_0000..=0x00_27FF_FFFF;
+    #[cfg(feature = "base-revc")]
     pub const CCI_550: RangeInclusive<usize> = 0x00_2A00_0000..=0x00_2A09_FFFF;
     pub const REFCLK_CNTCONTROL: RangeInclusive<usize> = 0x00_2A43_0000..=0x00_2A43_FFFF;
     pub const EL2_WATCHDOG_CONTROL: RangeInclusive<usize> = 0x00_2A44_0000..=0x00_2A44_FFFF;
@@ -87,18 +90,24 @@ impl MemoryMap {
     pub const AP_REFCLK_CNTBASE0: RangeInclusive<usize> = 0x00_2A82_0000..=0x00_2A82_FFFF;
     pub const AP_REFCLK_CNTBASE1: RangeInclusive<usize> = 0x00_2A83_0000..=0x00_2A83_FFFF;
     pub const DMC_400_CFG: RangeInclusive<usize> = 0x00_2B0A_0000..=0x00_2B0A_FFFF;
+    #[cfg(feature = "base-revc")]
     pub const SMMUV3_AEM: RangeInclusive<usize> = 0x00_2B40_0000..=0x00_2B4F_FFFF;
+    #[cfg(feature = "base-revc")]
     pub const DMA330X4: RangeInclusive<usize> = 0x00_2B50_0000..=0x00_2B5F_FFFF;
     pub const GICC: RangeInclusive<usize> = 0x00_2C00_0000..=0x00_2C00_1FFF;
     pub const GICH: RangeInclusive<usize> = 0x00_2C01_0000..=0x00_2C01_0FFF;
     pub const GICV: RangeInclusive<usize> = 0x00_2C02_F000..=0x00_2C03_0FFF;
+    #[cfg(not(feature = "base-revc"))]
     pub const CCI_400: RangeInclusive<usize> = 0x00_2C09_0000..=0x00_2C09_FFFF;
+    #[cfg(feature = "base-revc")]
     pub const MALI_G76: RangeInclusive<usize> = 0x00_2D00_0000..=0x00_2DFF_0000;
     pub const NON_TRUSTED_SRAM: RangeInclusive<usize> = 0x00_2E00_0000..=0x00_2E00_FFFF;
     pub const GICD: RangeInclusive<usize> = 0x00_2F00_0000..=0x00_2F00_FFFF;
     pub const GITS: RangeInclusive<usize> = 0x00_2F02_0000..=0x00_2F03_FFFF;
     pub const GICR: RangeInclusive<usize> = 0x00_2F10_0000..=0x00_2F1F_FFFF;
+    #[cfg(feature = "base-revc")]
     pub const PCIE_CONFIG_REGION: RangeInclusive<usize> = 0x00_4000_0000..=0x00_4FFF_FFFF;
+    #[cfg(feature = "base-revc")]
     pub const PCIE_MEMORY_REGION1: RangeInclusive<usize> = 0x00_5000_0000..=0x00_5FFF_FFFF;
     pub const TRUSTED_RNG: RangeInclusive<usize> = 0x00_7FE6_0000..=0x00_7FE6_0FFF;
     pub const TRUSTED_NV_COUNTERS: RangeInclusive<usize> = 0x00_7FE7_0000..=0x00_7FE7_0FFF;
@@ -107,6 +116,7 @@ impl MemoryMap {
     pub const HDLCD_CONTROLLER: RangeInclusive<usize> = 0x00_7FF6_0000..=0x00_7FF6_FFFF;
     pub const DRAM0: RangeInclusive<usize> = 0x00_8000_0000..=0x00_FFFF_FFFF;
     pub const DRAM1: RangeInclusive<usize> = 0x08_8000_0000..=0x0F_FFFF_FFFF;
+    #[cfg(feature = "base-revc")]
     pub const PCIE_MEMORY_REGION2: RangeInclusive<usize> = 0x40_0000_0000..=0x7F_FFFF_FFFF;
     pub const DRAM2: RangeInclusive<usize> = 0x88_0000_0000..=0xFF_FFFF_FFFF;
     pub const DRAM3: RangeInclusive<usize> = 0x00_0880_0000_0000..=0x00_0FFF_FFFF_FFFF;
@@ -126,6 +136,7 @@ pub struct Peripherals {
     pub watchdog: PhysicalInstance<SP805Registers>,
     pub power_controller: PhysicalInstance<FvpPowerControllerRegisters>,
     /// CCI-550 is only available on the FVP Base RevC platform when the cluster count is 1 or 2.
+    #[cfg(feature = "base-revc")]
     pub cci_550: PhysicalInstance<Cci5x0Registers>,
     pub refclk_cntcontrol: PhysicalInstance<CntControlBase>,
     pub trusted_watchdog: PhysicalInstance<SP805Registers>,
@@ -165,6 +176,7 @@ impl Peripherals {
             uart3: PhysicalInstance::new(*MemoryMap::UART3.start()),
             watchdog: PhysicalInstance::new(*MemoryMap::WATCHDOG.start()),
             power_controller: PhysicalInstance::new(*MemoryMap::POWER_CONTROLLER.start()),
+            #[cfg(feature = "base-revc")]
             cci_550: PhysicalInstance::new(*MemoryMap::CCI_550.start()),
             refclk_cntcontrol: PhysicalInstance::new(*MemoryMap::REFCLK_CNTCONTROL.start()),
             trusted_watchdog: PhysicalInstance::new(*MemoryMap::TRUSTED_WATCHDOG.start()),
@@ -180,8 +192,10 @@ impl Peripherals {
 }
 
 /// CCI-550 index assignment of internal components.
+#[cfg(feature = "base-revc")]
 pub struct Cci550Map;
 
+#[cfg(feature = "base-revc")]
 impl Cci550Map {
     /// Index of cluster 0.
     pub const CLUSTER0: usize = 5;
@@ -274,6 +288,12 @@ impl SharedPeripheralInterrupts {
     pub const PMUIRQ_CL1_CPU1: IntId = IntId::spi(65);
     pub const PMUIRQ_CL1_CPU2: IntId = IntId::spi(66);
     pub const PMUIRQ_CL1_CPU3: IntId = IntId::spi(67);
+    pub const HDLCD_CONTROLLER: IntId = IntId::spi(85);
+    pub const TRUSTED_RNG: IntId = IntId::spi(107);
+}
+
+#[cfg(feature = "base-revc")]
+impl SharedPeripheralInterrupts {
     pub const SMMUV3_NONSECURE_COMBINED: IntId = IntId::spi(71);
     pub const SMMUV3_SECURE_COMBINED: IntId = IntId::spi(72);
     pub const SMMUV3_SECURE_EVENT_QUEUE: IntId = IntId::spi(73);
@@ -283,8 +303,6 @@ impl SharedPeripheralInterrupts {
     pub const SMMUV3_NONSECURE_COMMAND_QUEUE_SYNC: IntId = IntId::spi(77);
     pub const SMMUV3_SECURE_GERROR: IntId = IntId::spi(78);
     pub const SMMUV3_NONSECURE_GERROR: IntId = IntId::spi(79);
-    pub const HDLCD_CONTROLLER: IntId = IntId::spi(85);
-    pub const TRUSTED_RNG: IntId = IntId::spi(107);
     pub const MALI_G76_GPU: IntId = IntId::spi(160);
     pub const MALI_G76_GPU_JOB: IntId = IntId::spi(161);
     pub const MALI_G76_GPU_MMU: IntId = IntId::spi(162);
