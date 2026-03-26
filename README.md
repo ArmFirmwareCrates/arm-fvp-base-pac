@@ -20,6 +20,7 @@ and [Fast Models Reference Guide Revision: 11.28](https://developer.arm.com/docu
 ## Feature flags
 
 * `base-revc`: Enables the Base Platform RevC-only MMIO regions and interrupt assignments.
+* `base-r`: Selects a BaseR Platform compatible memory map, by swapping the first two 2 GiB blocks of address space.
 
 ## Limitations
 

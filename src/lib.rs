@@ -5,6 +5,9 @@
 #![doc = include_str!("../README.md")]
 #![deny(clippy::undocumented_unsafe_blocks)]
 
+#[cfg(all(feature = "base-revc", feature = "base-r"))]
+compile_error!("must only choose one of these Cargo features: `base-revc`; `base-r`");
+
 pub mod power_controller;
 pub mod system;
 
@@ -43,86 +46,87 @@ pub struct MemoryMap;
 
 #[allow(unused)]
 impl MemoryMap {
-    pub const TRUSTED_BOOT_ROM: RangeInclusive<usize> = 0x00_0000_0000..=0x00_03FF_FFFF;
-    pub const TRUSTED_SRAM: RangeInclusive<usize> = 0x00_0400_0000..=0x00_0407_FFFF;
-    pub const TRUSTED_DRAM: RangeInclusive<usize> = 0x00_0600_0000..=0x00_07FF_FFFF;
-    pub const NOR_FLASH0: RangeInclusive<usize> = 0x00_0800_0000..=0x00_0BFF_FFFF;
-    pub const NOR_FLASH1: RangeInclusive<usize> = 0x00_0C00_0000..=0x00_0FFF_FFFF;
-    pub const PSRAM: RangeInclusive<usize> = 0x00_1400_0000..=0x00_17FF_FFFF;
-    pub const VRAM: RangeInclusive<usize> = 0x00_1800_0000..=0x00_19FF_FFFF;
-    pub const ETHERNET: RangeInclusive<usize> = 0x00_1A00_0000..=0x00_1AFF_FFFF;
-    pub const USB: RangeInclusive<usize> = 0x00_1B00_0000..=0x00_1BFF_FFFF;
-    pub const VE_SYSTEM: RangeInclusive<usize> = 0x00_1C01_0000..=0x00_1C01_FFFF;
-    pub const SYSTEM_CONTROLLER: RangeInclusive<usize> = 0x00_1C02_0000..=0x00_1C02_FFFF;
-    pub const AACI: RangeInclusive<usize> = 0x00_1C04_0000..=0x00_1C04_FFFF;
-    pub const MCI: RangeInclusive<usize> = 0x00_1C05_0000..=0x00_1C05_FFFF;
-    pub const KMI_KEYBOARD: RangeInclusive<usize> = 0x00_1C06_0000..=0x00_1C06_FFFF;
-    pub const KMI_MOUSE: RangeInclusive<usize> = 0x00_1C07_0000..=0x00_1C07_FFFF;
-    pub const UART0: RangeInclusive<usize> = 0x00_1C09_0000..=0x00_1C09_FFFF;
-    pub const UART1: RangeInclusive<usize> = 0x00_1C0A_0000..=0x00_1C0A_FFFF;
-    pub const UART2: RangeInclusive<usize> = 0x00_1C0B_0000..=0x00_1C0B_FFFF;
-    pub const UART3: RangeInclusive<usize> = 0x00_1C0C_0000..=0x00_1C0C_FFFF;
-    pub const VFS2: RangeInclusive<usize> = 0x00_1C0D_0000..=0x00_1C0D_FFFF;
-    pub const WATCHDOG: RangeInclusive<usize> = 0x00_1C0F_0000..=0x00_1C0F_FFFF;
-    pub const POWER_CONTROLLER: RangeInclusive<usize> = 0x00_1C10_0000..=0x00_1C10_FFFF;
-    pub const DUAL_TIMER0: RangeInclusive<usize> = 0x00_1C11_0000..=0x00_1C11_FFFF;
-    pub const DUAL_TIMER1: RangeInclusive<usize> = 0x00_1C12_0000..=0x00_1C12_FFFF;
-    pub const VIRTIO_BLOCK_DEVICE: RangeInclusive<usize> = 0x00_1C13_0000..=0x00_1C13_FFFF;
-    pub const VIRTIO_PLAN9_DEVICE: RangeInclusive<usize> = 0x00_1C14_0000..=0x00_1C14_FFFF;
-    pub const VIRTIO_NET_DEVICE: RangeInclusive<usize> = 0x00_1C15_0000..=0x00_1C15_FFFF;
-    pub const RTC: RangeInclusive<usize> = 0x00_1C17_0000..=0x00_1C17_FFFF;
-    pub const CF_CARD: RangeInclusive<usize> = 0x00_1C1A_0000..=0x00_1C1A_FFFF;
-    pub const CLCD_CONTROLLER: RangeInclusive<usize> = 0x00_1C1F_0000..=0x00_1C1F_FFFF;
-    pub const VIRTIO_RNG: RangeInclusive<usize> = 0x00_1C20_0000..=0x00_1C20_FFFF;
-    pub const LS64_TESTING_FIFO: RangeInclusive<usize> = 0x00_1D00_0000..=0x00_1D00_FFFF;
-    pub const UTILITY_BUS: RangeInclusive<usize> = 0x00_1E00_0000..=0x00_1EFF_FFFF;
-    pub const NON_TRUSTED_ROM: RangeInclusive<usize> = 0x00_1F00_0000..=0x00_1F00_0FFF;
-    pub const CORESIGHT: RangeInclusive<usize> = 0x00_2000_0000..=0x00_27FF_FFFF;
+    pub const TRUSTED_BOOT_ROM: RangeInclusive<usize> = flip(0x00_0000_0000..=0x00_03FF_FFFF);
+    pub const TRUSTED_SRAM: RangeInclusive<usize> = flip(0x00_0400_0000..=0x00_0407_FFFF);
+    pub const TRUSTED_DRAM: RangeInclusive<usize> = flip(0x00_0600_0000..=0x00_07FF_FFFF);
+    pub const NOR_FLASH0: RangeInclusive<usize> = flip(0x00_0800_0000..=0x00_0BFF_FFFF);
+    pub const NOR_FLASH1: RangeInclusive<usize> = flip(0x00_0C00_0000..=0x00_0FFF_FFFF);
+    pub const PSRAM: RangeInclusive<usize> = flip(0x00_1400_0000..=0x00_17FF_FFFF);
+    pub const VRAM: RangeInclusive<usize> = flip(0x00_1800_0000..=0x00_19FF_FFFF);
+    pub const ETHERNET: RangeInclusive<usize> = flip(0x00_1A00_0000..=0x00_1AFF_FFFF);
+    pub const USB: RangeInclusive<usize> = flip(0x00_1B00_0000..=0x00_1BFF_FFFF);
+    pub const VE_SYSTEM: RangeInclusive<usize> = flip(0x00_1C01_0000..=0x00_1C01_FFFF);
+    pub const SYSTEM_CONTROLLER: RangeInclusive<usize> = flip(0x00_1C02_0000..=0x00_1C02_FFFF);
+    pub const AACI: RangeInclusive<usize> = flip(0x00_1C04_0000..=0x00_1C04_FFFF);
+    pub const MCI: RangeInclusive<usize> = flip(0x00_1C05_0000..=0x00_1C05_FFFF);
+    pub const KMI_KEYBOARD: RangeInclusive<usize> = flip(0x00_1C06_0000..=0x00_1C06_FFFF);
+    pub const KMI_MOUSE: RangeInclusive<usize> = flip(0x00_1C07_0000..=0x00_1C07_FFFF);
+    pub const UART0: RangeInclusive<usize> = flip(0x00_1C09_0000..=0x00_1C09_FFFF);
+    pub const UART1: RangeInclusive<usize> = flip(0x00_1C0A_0000..=0x00_1C0A_FFFF);
+    pub const UART2: RangeInclusive<usize> = flip(0x00_1C0B_0000..=0x00_1C0B_FFFF);
+    pub const UART3: RangeInclusive<usize> = flip(0x00_1C0C_0000..=0x00_1C0C_FFFF);
+    pub const VFS2: RangeInclusive<usize> = flip(0x00_1C0D_0000..=0x00_1C0D_FFFF);
+    pub const WATCHDOG: RangeInclusive<usize> = flip(0x00_1C0F_0000..=0x00_1C0F_FFFF);
+    pub const POWER_CONTROLLER: RangeInclusive<usize> = flip(0x00_1C10_0000..=0x00_1C10_FFFF);
+    pub const DUAL_TIMER0: RangeInclusive<usize> = flip(0x00_1C11_0000..=0x00_1C11_FFFF);
+    pub const DUAL_TIMER1: RangeInclusive<usize> = flip(0x00_1C12_0000..=0x00_1C12_FFFF);
+    pub const VIRTIO_BLOCK_DEVICE: RangeInclusive<usize> = flip(0x00_1C13_0000..=0x00_1C13_FFFF);
+    pub const VIRTIO_PLAN9_DEVICE: RangeInclusive<usize> = flip(0x00_1C14_0000..=0x00_1C14_FFFF);
+    pub const VIRTIO_NET_DEVICE: RangeInclusive<usize> = flip(0x00_1C15_0000..=0x00_1C15_FFFF);
+    pub const RTC: RangeInclusive<usize> = flip(0x00_1C17_0000..=0x00_1C17_FFFF);
+    pub const CF_CARD: RangeInclusive<usize> = flip(0x00_1C1A_0000..=0x00_1C1A_FFFF);
+    pub const CLCD_CONTROLLER: RangeInclusive<usize> = flip(0x00_1C1F_0000..=0x00_1C1F_FFFF);
+    pub const VIRTIO_RNG: RangeInclusive<usize> = flip(0x00_1C20_0000..=0x00_1C20_FFFF);
+    pub const LS64_TESTING_FIFO: RangeInclusive<usize> = flip(0x00_1D00_0000..=0x00_1D00_FFFF);
+    pub const UTILITY_BUS: RangeInclusive<usize> = flip(0x00_1E00_0000..=0x00_1EFF_FFFF);
+    pub const NON_TRUSTED_ROM: RangeInclusive<usize> = flip(0x00_1F00_0000..=0x00_1F00_0FFF);
+    pub const CORESIGHT: RangeInclusive<usize> = flip(0x00_2000_0000..=0x00_27FF_FFFF);
     #[cfg(feature = "base-revc")]
-    pub const CCI_550: RangeInclusive<usize> = 0x00_2A00_0000..=0x00_2A09_FFFF;
-    pub const REFCLK_CNTCONTROL: RangeInclusive<usize> = 0x00_2A43_0000..=0x00_2A43_FFFF;
-    pub const EL2_WATCHDOG_CONTROL: RangeInclusive<usize> = 0x00_2A44_0000..=0x00_2A44_FFFF;
-    pub const EL2_WATCHDOG_REFRESH: RangeInclusive<usize> = 0x00_2A45_0000..=0x00_2A45_FFFF;
-    pub const TRUSTED_WATCHDOG: RangeInclusive<usize> = 0x00_2A49_0000..=0x00_2A49_FFFF;
-    pub const TRUSTZONE_CONTROLLER: RangeInclusive<usize> = 0x00_2A4A_0000..=0x00_2A4A_FFFF;
-    pub const REFCLK_CNTREAD: RangeInclusive<usize> = 0x00_2A80_0000..=0x00_2A80_FFFF;
-    pub const AP_REFCLK_CNTCTL: RangeInclusive<usize> = 0x00_2A81_0000..=0x00_2A81_FFFF;
-    pub const AP_REFCLK_CNTBASE0: RangeInclusive<usize> = 0x00_2A82_0000..=0x00_2A82_FFFF;
-    pub const AP_REFCLK_CNTBASE1: RangeInclusive<usize> = 0x00_2A83_0000..=0x00_2A83_FFFF;
-    pub const DMC_400_CFG: RangeInclusive<usize> = 0x00_2B0A_0000..=0x00_2B0A_FFFF;
+    pub const CCI_550: RangeInclusive<usize> = flip(0x00_2A00_0000..=0x00_2A09_FFFF);
+    pub const REFCLK_CNTCONTROL: RangeInclusive<usize> = flip(0x00_2A43_0000..=0x00_2A43_FFFF);
+    pub const EL2_WATCHDOG_CONTROL: RangeInclusive<usize> = flip(0x00_2A44_0000..=0x00_2A44_FFFF);
+    pub const EL2_WATCHDOG_REFRESH: RangeInclusive<usize> = flip(0x00_2A45_0000..=0x00_2A45_FFFF);
+    pub const TRUSTED_WATCHDOG: RangeInclusive<usize> = flip(0x00_2A49_0000..=0x00_2A49_FFFF);
+    pub const TRUSTZONE_CONTROLLER: RangeInclusive<usize> = flip(0x00_2A4A_0000..=0x00_2A4A_FFFF);
+    pub const REFCLK_CNTREAD: RangeInclusive<usize> = flip(0x00_2A80_0000..=0x00_2A80_FFFF);
+    pub const AP_REFCLK_CNTCTL: RangeInclusive<usize> = flip(0x00_2A81_0000..=0x00_2A81_FFFF);
+    pub const AP_REFCLK_CNTBASE0: RangeInclusive<usize> = flip(0x00_2A82_0000..=0x00_2A82_FFFF);
+    pub const AP_REFCLK_CNTBASE1: RangeInclusive<usize> = flip(0x00_2A83_0000..=0x00_2A83_FFFF);
+    pub const DMC_400_CFG: RangeInclusive<usize> = flip(0x00_2B0A_0000..=0x00_2B0A_FFFF);
     #[cfg(feature = "base-revc")]
-    pub const SMMUV3_AEM: RangeInclusive<usize> = 0x00_2B40_0000..=0x00_2B4F_FFFF;
+    pub const SMMUV3_AEM: RangeInclusive<usize> = flip(0x00_2B40_0000..=0x00_2B4F_FFFF);
     #[cfg(feature = "base-revc")]
-    pub const DMA330X4: RangeInclusive<usize> = 0x00_2B50_0000..=0x00_2B5F_FFFF;
-    pub const GICC: RangeInclusive<usize> = 0x00_2C00_0000..=0x00_2C00_1FFF;
-    pub const GICH: RangeInclusive<usize> = 0x00_2C01_0000..=0x00_2C01_0FFF;
-    pub const GICV: RangeInclusive<usize> = 0x00_2C02_F000..=0x00_2C03_0FFF;
+    pub const DMA330X4: RangeInclusive<usize> = flip(0x00_2B50_0000..=0x00_2B5F_FFFF);
+    pub const GICC: RangeInclusive<usize> = flip(0x00_2C00_0000..=0x00_2C00_1FFF);
+    pub const GICH: RangeInclusive<usize> = flip(0x00_2C01_0000..=0x00_2C01_0FFF);
+    pub const GICV: RangeInclusive<usize> = flip(0x00_2C02_F000..=0x00_2C03_0FFF);
     #[cfg(not(feature = "base-revc"))]
-    pub const CCI_400: RangeInclusive<usize> = 0x00_2C09_0000..=0x00_2C09_FFFF;
+    pub const CCI_400: RangeInclusive<usize> = flip(0x00_2C09_0000..=0x00_2C09_FFFF);
     #[cfg(feature = "base-revc")]
-    pub const MALI_G76: RangeInclusive<usize> = 0x00_2D00_0000..=0x00_2DFF_0000;
-    pub const NON_TRUSTED_SRAM: RangeInclusive<usize> = 0x00_2E00_0000..=0x00_2E00_FFFF;
-    pub const GICD: RangeInclusive<usize> = 0x00_2F00_0000..=0x00_2F00_FFFF;
-    pub const GITS: RangeInclusive<usize> = 0x00_2F02_0000..=0x00_2F03_FFFF;
-    pub const GICR: RangeInclusive<usize> = 0x00_2F10_0000..=0x00_2F1F_FFFF;
+    pub const MALI_G76: RangeInclusive<usize> = flip(0x00_2D00_0000..=0x00_2DFF_0000);
+    pub const NON_TRUSTED_SRAM: RangeInclusive<usize> = flip(0x00_2E00_0000..=0x00_2E00_FFFF);
+    pub const GICD: RangeInclusive<usize> = flip(0x00_2F00_0000..=0x00_2F00_FFFF);
+    pub const GITS: RangeInclusive<usize> = flip(0x00_2F02_0000..=0x00_2F03_FFFF);
+    pub const GICR: RangeInclusive<usize> = flip(0x00_2F10_0000..=0x00_2F1F_FFFF);
     #[cfg(feature = "base-revc")]
-    pub const PCIE_CONFIG_REGION: RangeInclusive<usize> = 0x00_4000_0000..=0x00_4FFF_FFFF;
+    pub const PCIE_CONFIG_REGION: RangeInclusive<usize> = flip(0x00_4000_0000..=0x00_4FFF_FFFF);
     #[cfg(feature = "base-revc")]
-    pub const PCIE_MEMORY_REGION1: RangeInclusive<usize> = 0x00_5000_0000..=0x00_5FFF_FFFF;
-    pub const TRUSTED_RNG: RangeInclusive<usize> = 0x00_7FE6_0000..=0x00_7FE6_0FFF;
-    pub const TRUSTED_NV_COUNTERS: RangeInclusive<usize> = 0x00_7FE7_0000..=0x00_7FE7_0FFF;
-    pub const TRUSTED_ROOT_KEY_STORAGE: RangeInclusive<usize> = 0x00_7FE8_0000..=0x00_7FE8_0FFF;
-    pub const DDR3_PHY: RangeInclusive<usize> = 0x00_7FEF_0000..=0x00_7FEF_FFFF;
-    pub const HDLCD_CONTROLLER: RangeInclusive<usize> = 0x00_7FF6_0000..=0x00_7FF6_FFFF;
-    pub const DRAM0: RangeInclusive<usize> = 0x00_8000_0000..=0x00_FFFF_FFFF;
-    pub const DRAM1: RangeInclusive<usize> = 0x08_8000_0000..=0x0F_FFFF_FFFF;
+    pub const PCIE_MEMORY_REGION1: RangeInclusive<usize> = flip(0x00_5000_0000..=0x00_5FFF_FFFF);
+    pub const TRUSTED_RNG: RangeInclusive<usize> = flip(0x00_7FE6_0000..=0x00_7FE6_0FFF);
+    pub const TRUSTED_NV_COUNTERS: RangeInclusive<usize> = flip(0x00_7FE7_0000..=0x00_7FE7_0FFF);
+    pub const TRUSTED_ROOT_KEY_STORAGE: RangeInclusive<usize> =
+        flip(0x00_7FE8_0000..=0x00_7FE8_0FFF);
+    pub const DDR3_PHY: RangeInclusive<usize> = flip(0x00_7FEF_0000..=0x00_7FEF_FFFF);
+    pub const HDLCD_CONTROLLER: RangeInclusive<usize> = flip(0x00_7FF6_0000..=0x00_7FF6_FFFF);
+    pub const DRAM0: RangeInclusive<usize> = flip(0x00_8000_0000..=0x00_FFFF_FFFF);
+    pub const DRAM1: RangeInclusive<usize> = flip(0x08_8000_0000..=0x0F_FFFF_FFFF);
     #[cfg(feature = "base-revc")]
-    pub const PCIE_MEMORY_REGION2: RangeInclusive<usize> = 0x40_0000_0000..=0x7F_FFFF_FFFF;
-    pub const DRAM2: RangeInclusive<usize> = 0x88_0000_0000..=0xFF_FFFF_FFFF;
-    pub const DRAM3: RangeInclusive<usize> = 0x00_0880_0000_0000..=0x00_0FFF_FFFF_FFFF;
-    pub const DRAM4: RangeInclusive<usize> = 0x00_8800_0000_0000..=0x00_FFFF_FFFF_FFFF;
-    pub const DRAM5: RangeInclusive<usize> = 0x08_8000_0000_0000..=0x0F_FFFF_FFFF_FFFF;
-    pub const DRAM6: RangeInclusive<usize> = 0x88_0000_0000_0000..=0x8F_FFFF_FFFF_FFFF;
+    pub const PCIE_MEMORY_REGION2: RangeInclusive<usize> = flip(0x40_0000_0000..=0x7F_FFFF_FFFF);
+    pub const DRAM2: RangeInclusive<usize> = flip(0x88_0000_0000..=0xFF_FFFF_FFFF);
+    pub const DRAM3: RangeInclusive<usize> = flip(0x00_0880_0000_0000..=0x00_0FFF_FFFF_FFFF);
+    pub const DRAM4: RangeInclusive<usize> = flip(0x00_8800_0000_0000..=0x00_FFFF_FFFF_FFFF);
+    pub const DRAM5: RangeInclusive<usize> = flip(0x08_8000_0000_0000..=0x0F_FFFF_FFFF_FFFF);
+    pub const DRAM6: RangeInclusive<usize> = flip(0x88_0000_0000_0000..=0x8F_FFFF_FFFF_FFFF);
 }
 
 /// FVP peripherals
@@ -311,4 +315,23 @@ impl SharedPeripheralInterrupts {
     pub const PCIE_INTC: IntId = IntId::spi(170);
     pub const PCIE_INTD: IntId = IntId::spi(171);
     pub const PCIE_SERR: IntId = IntId::spi(175);
+}
+
+/// For `base-r` platforms, flips the lower 2 GiB and upper 2 GiB regions.
+///
+/// This is a no-op if the `base-r` feature is not set.
+const fn flip(range: RangeInclusive<usize>) -> RangeInclusive<usize> {
+    const LIMIT_4GB: usize = 0x1_0000_0000;
+    #[cfg(feature = "base-r")]
+    const FLIP_BIT: usize = 0x8000_0000;
+    #[cfg(not(feature = "base-r"))]
+    const FLIP_BIT: usize = 0x0000_0000;
+
+    let mut start = *range.start();
+    let mut end = *range.end();
+    if start < LIMIT_4GB && end < LIMIT_4GB {
+        start ^= FLIP_BIT;
+        end ^= FLIP_BIT;
+    };
+    start..=end
 }
