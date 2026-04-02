@@ -27,8 +27,8 @@ pub use safe_mmio::{PhysicalInstance, UniqueMmioPointer};
 use arm_cci::Cci5x0Registers;
 use arm_generic_timer::memory_mapped::{CntBase, CntControlBase, CntCtlBase, CntReadBase};
 use arm_gic::{
-    gicv3::registers::{Gicd, GicrSgi},
     IntId,
+    gicv3::registers::{Gicd, GicrSgi},
 };
 use arm_pl011_uart::PL011Registers;
 use arm_sp805::SP805Registers;
@@ -169,29 +169,35 @@ impl Peripherals {
     ///
     /// # Safety
     ///
-    /// The caller must ensure that each peripheral is only used once.
+    /// This must not be called while any other instance of this type or the peripherals it contains
+    /// exists.
     pub unsafe fn steal() -> Self {
         *PERIPHERALS_TAKEN.lock() = true;
 
-        Peripherals {
-            system: PhysicalInstance::new(*MemoryMap::VE_SYSTEM.start()),
-            uart0: PhysicalInstance::new(*MemoryMap::UART0.start()),
-            uart1: PhysicalInstance::new(*MemoryMap::UART1.start()),
-            uart2: PhysicalInstance::new(*MemoryMap::UART2.start()),
-            uart3: PhysicalInstance::new(*MemoryMap::UART3.start()),
-            watchdog: PhysicalInstance::new(*MemoryMap::WATCHDOG.start()),
-            power_controller: PhysicalInstance::new(*MemoryMap::POWER_CONTROLLER.start()),
-            #[cfg(feature = "base-revc")]
-            cci_550: PhysicalInstance::new(*MemoryMap::CCI_550.start()),
-            refclk_cntcontrol: PhysicalInstance::new(*MemoryMap::REFCLK_CNTCONTROL.start()),
-            trusted_watchdog: PhysicalInstance::new(*MemoryMap::TRUSTED_WATCHDOG.start()),
-            trustzone_controller: PhysicalInstance::new(*MemoryMap::TRUSTZONE_CONTROLLER.start()),
-            refclk_cntread: PhysicalInstance::new(*MemoryMap::REFCLK_CNTREAD.start()),
-            ap_refclk_cntctl: PhysicalInstance::new(*MemoryMap::AP_REFCLK_CNTCTL.start()),
-            ap_refclk_cntbase0: PhysicalInstance::new(*MemoryMap::AP_REFCLK_CNTBASE0.start()),
-            ap_refclk_cntbase1: PhysicalInstance::new(*MemoryMap::AP_REFCLK_CNTBASE1.start()),
-            gicd: PhysicalInstance::new(*MemoryMap::GICD.start()),
-            gicr: PhysicalInstance::new(*MemoryMap::GICR.start()),
+        // SAFETY: The caller guarantees that no other instance exists.
+        unsafe {
+            Peripherals {
+                system: PhysicalInstance::new(*MemoryMap::VE_SYSTEM.start()),
+                uart0: PhysicalInstance::new(*MemoryMap::UART0.start()),
+                uart1: PhysicalInstance::new(*MemoryMap::UART1.start()),
+                uart2: PhysicalInstance::new(*MemoryMap::UART2.start()),
+                uart3: PhysicalInstance::new(*MemoryMap::UART3.start()),
+                watchdog: PhysicalInstance::new(*MemoryMap::WATCHDOG.start()),
+                power_controller: PhysicalInstance::new(*MemoryMap::POWER_CONTROLLER.start()),
+                #[cfg(feature = "base-revc")]
+                cci_550: PhysicalInstance::new(*MemoryMap::CCI_550.start()),
+                refclk_cntcontrol: PhysicalInstance::new(*MemoryMap::REFCLK_CNTCONTROL.start()),
+                trusted_watchdog: PhysicalInstance::new(*MemoryMap::TRUSTED_WATCHDOG.start()),
+                trustzone_controller: PhysicalInstance::new(
+                    *MemoryMap::TRUSTZONE_CONTROLLER.start(),
+                ),
+                refclk_cntread: PhysicalInstance::new(*MemoryMap::REFCLK_CNTREAD.start()),
+                ap_refclk_cntctl: PhysicalInstance::new(*MemoryMap::AP_REFCLK_CNTCTL.start()),
+                ap_refclk_cntbase0: PhysicalInstance::new(*MemoryMap::AP_REFCLK_CNTBASE0.start()),
+                ap_refclk_cntbase1: PhysicalInstance::new(*MemoryMap::AP_REFCLK_CNTBASE1.start()),
+                gicd: PhysicalInstance::new(*MemoryMap::GICD.start()),
+                gicr: PhysicalInstance::new(*MemoryMap::GICR.start()),
+            }
         }
     }
 }
