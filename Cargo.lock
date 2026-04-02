@@ -31,12 +31,13 @@ dependencies = [
 
 [[package]]
 name = "arm-generic-timer"
-version = "0.2.0"
+version = "0.2.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "0347b48f31176c70572a47daaee50e1c5a5c597fe7cd12c87f403fda46e19225"
+checksum = "c3824e9440c3f0345bc802b539062d38b6cb720821a6fabb1299ef87689c9f58"
 dependencies = [
  "arm-sysregs",
  "bitflags",
+ "embedded-hal",
  "safe-mmio",
  "zerocopy",
 ]
